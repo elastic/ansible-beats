@@ -1,0 +1,3 @@
+---
+default_file: "/etc/default"
+init_script: "/etc/init.d"

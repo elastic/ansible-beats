@@ -1,0 +1,26 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: ansible_playbook
+  hosts: localhost
+  roles_path: ../
+  require_ansible_repo: true
+  ansible_verbose: true
+
+platforms:
+  - name: ubuntu-14.04
+    driver_config:
+      image: dliappis/ubuntu:14.04
+      privileged: true
+      provision_command:
+        - apt-get update && apt-get install -y software-properties-common &&  add-apt-repository -y ppa:ansible/ansible
+        - apt-get update && apt-get -y -q install ansible python-apt python-pycurl
+      use_sudo: false
+suites:
+  - name: standard
+    provisioner:
+      playbook: test/integration/standard.yml
+    run_list:
+    attributes:

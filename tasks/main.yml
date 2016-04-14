@@ -1,2 +1,10 @@
 ---
 # tasks file for beats
+
+- name: check-parameters
+  include: checkParameters.yml
+
+- name: os-specific vars
+  include_vars: "{{ansible_os_family}}.yml"
+
+- include: beats.yml

@@ -1,0 +1,7 @@
+---
+- name: wrapper playbook for kitchen testing "beats"
+  hosts: localhost
+  roles:
+    - { role: beats, beat: "filebeat" }
+  vars:
+    beats_use_repository: "true"

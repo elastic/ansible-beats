@@ -1,0 +1,3 @@
+---
+default_file: "/etc/sysconfig"
+init_script: "/etc/init.d"

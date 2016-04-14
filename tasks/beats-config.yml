@@ -1,0 +1,27 @@
+# Configure Beats Node
+
+- set_fact: pid_file={{ beats_pid_dir }}/{{beat}}.pid
+- set_fact: instance_default_file={{ default_file }}/{{beat}}
+- set_fact: conf_file={{ beats_conf_dir }}/{{beat}}.yml
+
+- stat: path={{beats_pid_dir}}
+  register: pid_stat
+
+- name: Create PID Directory
+  file: path={{ beats_pid_dir }} state=directory
+  when: pid_stat.stat.isdir is not defined or pid_stat.stat.islnk is not defined
+
+#fail if pid and config directories are not links or not directories i.e files
+
+- name: Create Config Directory
+  file: path={{ beats_conf_dir }} state=directory
+
+#Copy the default file
+- name: Copy Default File for Instance
+  template: src=beat.j2 dest={{instance_default_file}} mode=0644 force=yes
+  notify: restart beat
+
+#Copy templated config file
+- name: Copy Configuration File
+  template: src=beat.yml.j2 dest={{conf_file}} mode=0644 force=yes
+  notify: restart beat

@@ -1,0 +1,31 @@
+################### {{beat}} Configuration #########################
+
+############################# {{beat}} ######################################
+{{beat}}:
+{% if beats_conf %}
+  {{ beats_conf | to_nice_yaml }}
+{% endif %}
+
+###############################################################################
+############################# Libbeat Config ##################################
+# Base config file used by all other beats for using libbeat features
+
+############################# Output ##########################################
+
+output:
+{% if beats_output_conf %}
+  {{ beats_output_conf | to_nice_yaml }}
+{% endif %}
+
+############################# Shipper #########################################
+shipper:
+{% if beats_shipper_conf %}
+  {{ beats_shipper_conf | to_nice_yaml }}
+{% endif %}
+
+############################# Logging #########################################
+logging:
+{% if beats_logging_conf %}
+  {{ beats_logging_conf | to_nice_yaml }}
+{% endif %}
+
