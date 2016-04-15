@@ -18,6 +18,22 @@ platforms:
         - apt-get update && apt-get install -y software-properties-common &&  add-apt-repository -y ppa:ansible/ansible
         - apt-get update && apt-get -y -q install ansible python-apt python-pycurl
       use_sudo: false
+  - name: centos-7
+    driver_config:
+      image: dliappis/centos:7
+      provision_command:
+        - yum remove -y ansible
+        - yum -y install gmp-devel python-devel python-pip
+        - yum -y groupinstall "Development Tools"
+        - pip install ansible
+        - sed -ri 's/^#?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
+        - sed -ri 's/^#?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+        - sed -ri 's/^#?UsePAM .*/UsePAM no/' /etc/ssh/sshd_config
+        - yum -y install initscripts
+        - yum clean all
+      run_command: "/usr/sbin/init"
+      privileged: true
+      use_sudo: false
 suites:
   - name: standard
     provisioner:

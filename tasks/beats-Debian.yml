@@ -13,13 +13,17 @@
   register: beat_install
   notify: restart beat
 
+- set_fact: os_arch="i386"
+
+- set_fact: os_arch="amd64"
+  when: ansible_architecture == "x86_64"
+
 - name: Debian - Download {{beat}} from url
-  get_url: url={% if beats_custom_package_url is defined %}{{ beats_custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_amd64.deb{% endif %} dest=/tmp/{{beat}}_{{ beats_version }}_amd64.deb validate_certs=no
-  register: beat_install
+  get_url: url={% if beats_custom_package_url is defined %}{{ beats_custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %} dest=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb validate_certs=no
   when: not use_repository
 
 - name: Debian - Ensure {{beat}} is installed from downloaded package
-  apt: deb=/tmp/{{beat}}_{{ beats_version }}_amd64.deb
+  apt: deb=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
   when: not use_repository
   register: beat_install
   notify: restart beat

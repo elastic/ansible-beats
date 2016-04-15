@@ -1,1 +1,20 @@
 ---
+- name: Ensure libselinux-python on CentOS 6.x
+  yum: name=libselinux-python state=present update_cache=yes
+  when: ( ansible_distribution == "CentOS" ) and ( ansible_distribution_major_version == "6" )
+
+- name: Redhat - add beats repository
+  template: src=beats.repo dest=/etc/yum.repos.d/beats.repo
+  when: use_repository
+
+- name: RedHat - Ensure {{beat}} is installed
+  yum: name={{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %} state=present update_cache=yes
+  when: use_repository
+  register: beat_install
+  notify: restart beat
+
+- name: RedHat - Install {{beat}} from url
+  yum: name={% if beats_custom_package_url is defined %}{{ beats_custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}-{{ beats_version }}-{{ansible_architecture}}.rpm{% endif %} state=present
+  when: not use_repository
+  register: beat_install
+  notify: restart beat

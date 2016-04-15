@@ -5,7 +5,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Include specific Beats
-  include: beats-redHat.yml
+  include: beats-redhat.yml
   when: ansible_os_family == 'RedHat'
 
 #Configuration file for beats
