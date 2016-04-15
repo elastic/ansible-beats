@@ -5,3 +5,6 @@
 #When using beats_use_repository=false, and no custom repository, the version must be specified as this used to construct the URL
 - fail: msg="beats_version must be specified when beats_use_repository=false and no beats_custom_package_url is specified"
   when: beats_version is not defined and beats_use_repository == false and (beats_custom_package_url is not defined or beats_custom_package_url == '')
+
+- fail: msg="beats_conf must be specified"
+  when: beats_conf is not defined

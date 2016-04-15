@@ -1,11 +1,11 @@
 
 # Install OS specific beats
 - name: Include specific Beats
-  include: beats-Debian.yml
+  include: beats-debian.yml
   when: ansible_os_family == 'Debian'
 
 - name: Include specific Beats
-  include: beats-RedHat.yml
+  include: beats-redHat.yml
   when: ansible_os_family == 'RedHat'
 
 #Configuration file for beats

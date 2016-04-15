@@ -8,6 +8,7 @@ daemon_args: ""
 beats_logging_conf: {"files":{"rotateeverybytes":10485760}}
 beats_shipper_conf:
 beats_output_conf: {"elasticsearch":{"hosts":["localhost:9200"]}}
-beats_conf:
 beats_pid_dir: "/var/run"
-beats_conf_dir: "/etc/{{beat}}/"
+beats_conf_dir: "/etc/{{beat}}"
+
+
