@@ -25,6 +25,14 @@ describe 'Standard Tests' do
   describe file('/etc/init.d/filebeat') do
     it { should exist }
   end
-  
+
+  describe file('/etc/default/filebeat') do
+    it { should exist }
+  end
+
+  describe file('/usr/lib/systemd/system/filebeat.service') do
+    it { should exist }
+  end
+
 end
 
