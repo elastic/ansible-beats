@@ -4,9 +4,9 @@
 - set_fact: instance_default_file={{ default_file }}/{{beat}}
 - set_fact: conf_file={{ beats_conf_dir }}/{{beat}}.yml
 
-- set_fact: beats_output_conf={{ beats_output_conf | merge_config('output') }}
-- set_fact: beats_shipper_conf={{ beats_shipper_conf | merge_config('shipper') }}
-- set_fact: beats_logging_conf={{ beats_logging_conf | merge_config('logging') }}
+- set_fact: beat_output_conf={{ output_conf | merge_config('output') }}
+- set_fact: beat_shipper_conf={{ shipper_conf | merge_config('shipper') }}
+- set_fact: beat_logging_conf={{ logging_conf | merge_config('logging') }}
 
 - stat: path={{beats_pid_dir}}
   register: pid_stat

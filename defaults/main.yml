@@ -5,9 +5,9 @@ use_repository: true
 start_service: true
 restart_on_change: true
 daemon_args: ""
-beats_logging_conf: {"files":{"rotateeverybytes":10485760}}
-beats_shipper_conf:
-beats_output_conf: {"elasticsearch":{"hosts":["localhost:9200"]}}
+logging_conf: {"files":{"rotateeverybytes":10485760}}
+shipper_conf:
+output_conf: {"elasticsearch":{"hosts":["localhost:9200"]}}
 beats_pid_dir: "/var/run"
 beats_conf_dir: "/etc/{{beat}}"
 

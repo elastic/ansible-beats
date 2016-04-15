@@ -71,3 +71,13 @@ suites:
       playbook: test/integration/standard.yml
     run_list:
     attributes:
+  - name: multi
+    provisioner:
+      playbook: test/integration/multi.yml
+    run_list:
+    attributes:
+  - name: config
+    provisioner:
+      playbook: test/integration/config.yml
+    run_list:
+    attributes:
