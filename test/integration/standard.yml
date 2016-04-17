@@ -4,4 +4,4 @@
   roles:
     - { role: beats, beat: "filebeat", beat_conf: {"filebeat": { {"prospectors":[{"paths":["/var/log/*.log"],"input_type":"log"}],"registry_file": "/var/lib/filebeat/registry"} } }  }
   vars:
-    beats_use_repository: "true"
+    use_repository: "true"

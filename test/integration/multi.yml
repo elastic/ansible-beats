@@ -5,4 +5,4 @@
     - { role: beats, beat: "filebeat", beat_conf: { "filebeat": {"prospectors":[{"paths":["/var/log/*.log"],"input_type":"log"}],"registry_file": "/var/lib/filebeat/registry"} } }
     - { role: beats, beat: "topbeat", beat_conf: { "input":{"period":10, "procs":[".*"],"stats":{"system":true, "process":true, "filesystem":true, "cpu_per_core": false}}},  }
   vars:
-    beats_use_repository: "true"
+    use_repository: "true"

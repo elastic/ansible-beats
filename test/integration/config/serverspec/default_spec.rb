@@ -20,6 +20,7 @@ describe 'Standard Tests' do
     it { should contain 'shipper:' }
     it { should contain 'logging:' }
     it { should contain 'output:' }
+    #COMPLETE CONTENT TESTS
   end
 
   describe file('/etc/init.d/packetbeat') do
