@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Standard Tests' do
+describe 'Config Tests' do
 
   describe service('packetbeat') do
     it { should be_running }

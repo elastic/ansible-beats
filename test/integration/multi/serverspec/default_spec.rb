@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Standard Tests' do
+describe 'Multi Tests' do
 
   describe service('filebeat') do
     it { should be_running }
