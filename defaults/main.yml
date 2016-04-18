@@ -1,6 +1,6 @@
 ---
 # defaults file for beats
-#version_lock: false
+version_lock: false
 use_repository: true
 start_service: true
 restart_on_change: true

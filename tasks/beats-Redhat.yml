@@ -7,8 +7,12 @@
   template: src=beats.repo dest=/etc/yum.repos.d/beats.repo
   when: use_repository
 
+- name: RedHat - include versionlock
+  include: beats-redhat-version-lock.yml
+  when: version_lock
+
 - name: RedHat - Ensure {{beat}} is installed
-  yum: name={{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %} state=present update_cache=yes
+  yum: name={{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %} state=present update_cache=yes
   when: use_repository
   register: beat_install
   notify: restart beat
