@@ -31,7 +31,7 @@ Role Variables
 
 Supported variables are as follows:
 
-- use_repository - use elastic repo for yum or apt if true. If false, a custom beats_custom_package_url must be provided. Defaults to true.
+- use_repository - use elastic repo for yum or apt if true. If false, a custom custom_package_url must be provided. Defaults to true.
 - start_service - service will be started if true, false otherwise.  Defaults to true.
 - restart_on_change - Changes to configuration or installed versions, will result in a restart if true.  Defaults to true.
 - daemon_args - Applicable to version 1.x of beats.  Allows run time params to be passed to beats.

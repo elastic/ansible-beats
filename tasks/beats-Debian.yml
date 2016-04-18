@@ -23,7 +23,7 @@
   when: ansible_architecture == "x86_64"
 
 - name: Debian - Download {{beat}} from url
-  get_url: url={% if beats_custom_package_url is defined %}{{ beats_custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %} dest=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb validate_certs=no
+  get_url: url={% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %} dest=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb validate_certs=no
   when: not use_repository
 
 - name: Debian - Ensure {{beat}} is installed from downloaded package

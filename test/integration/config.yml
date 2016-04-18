@@ -16,11 +16,10 @@
             },
             "memcache": {
               "ports": [11211]
-
-            }.
+            },
             "mysql": {
               "ports": [3306]
-            }.
+            },
             "pgsql": {
               "ports": [5432]
             },
