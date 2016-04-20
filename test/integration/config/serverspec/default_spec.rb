@@ -19,7 +19,17 @@ describe 'Config Tests' do
     it { should contain 'shipper:' }
     it { should contain 'logging:' }
     it { should contain 'output:' }
-    #COMPLETE CONTENT TESTS
+    it { should contain 'protocols:' }
+    it { should contain 'dns:' }
+    it { should contain 'memcache:' }
+    it { should contain 'http:' }
+    it { should contain 'mongodb:' }
+    it { should contain 'mysql:' }
+    it { should contain 'pgsql:' }
+    it { should contain 'redis:' }
+    it { should contain 'thrift:' }
+    it { should contain 'interfaces:' }
+    it { should contain 'device: any' }
   end
 
   describe file('/etc/init.d/packetbeat') do
