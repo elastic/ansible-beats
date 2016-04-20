@@ -2,6 +2,6 @@
 - name: wrapper playbook for kitchen testing "beats"
   hosts: localhost
   roles:
-    - { role: beats, beat: "filebeat", beat_conf: {"filebeat": { {"prospectors":[{"paths":["/var/log/*.log"],"input_type":"log"}],"registry_file": "/var/lib/filebeat/registry"} } }  }
+    - { role: beats, beat: "filebeat", beat_conf: {"filebeat": {"prospectors":[{"paths":["/var/log/*.log"],"input_type":"log"}],"registry_file": "/var/lib/filebeat/registry"} } }
   vars:
     use_repository: "true"
