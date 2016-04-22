@@ -1,7 +1,7 @@
 ---
+
 - name: RedHat - install yum-version-lock
   yum: name=yum-plugin-versionlock state=present update_cache=yes
 
 - name: RedHat - lock beats version
   shell: yum versionlock delete 0:{{beat}} ; yum versionlock add {{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %}
-
