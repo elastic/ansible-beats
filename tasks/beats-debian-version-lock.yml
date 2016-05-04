@@ -1,4 +1,9 @@
 ---
 
 - name: Debian - hold elasticsearch version
-  command: apt-mark hold elasticsearch
+  command: apt-mark hold {{beat}}
+  when: version_lock
+
+- name: Debian - hold elasticsearch version
+  command: apt-mark unhold {{beat}}
+  when: not version_lock
