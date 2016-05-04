@@ -8,15 +8,21 @@
   template: src=beats.repo dest=/etc/yum.repos.d/beats.repo
   when: use_repository
 
-- name: RedHat - include versionlock
-  include: beats-redhat-version-lock.yml
-  when: version_lock
+- name: RedHat - install yum-version-lock
+  yum: name=yum-plugin-versionlock state=present update_cache=yes
+
+- name: RedHat - unlock beats for install
+  shell: yum versionlock delete {{beat}}
 
 - name: RedHat - Ensure {{beat}} is installed
   yum: name={{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %} state=present update_cache=yes
   when: use_repository
   register: beat_install
   notify: restart beat
+
+- name: RedHat - lock beats version
+  shell: yum versionlock add {{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %}
+  when: version_lock
 
 - name: RedHat - Install {{beat}} from url
   yum: name={% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}-{{ beats_version }}-{{ansible_architecture}}.rpm{% endif %} state=present
