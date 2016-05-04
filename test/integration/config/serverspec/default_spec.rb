@@ -36,5 +36,15 @@ describe 'Config Tests' do
     it { should exist }
   end
 
+  if os[:family] == 'redhat'
+    describe command('yum versionlock list | grep packetbeat') do
+      its(:stdout) { should match /packetbeat/ }
+    end
+  elsif ['debian', 'ubuntu'].include?(os[:family])
+    describe command('sudo apt-mark showhold | grep packetbeat') do
+      its(:stdout) { should match /packetbeat/ }
+    end
+  end
+
 end
 

@@ -3,7 +3,7 @@
 - name: wrapper playbook for kitchen testing "beats"
   hosts: localhost
   roles:
-    - { role: beats, beat: "packetbeat",
+    - { role: beats, beat: "packetbeat", version_lock: true,
         beat_conf: {
           "interfaces": {"device":"any"},
           "protocols": {

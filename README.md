@@ -40,7 +40,7 @@ Supported variables are as follows:
 - output_conf - Output configuration. Should be defined as a map - see Example playbook below. Map is serialized into output section of beat config. Defaults to "{"elasticsearch":{"hosts":["localhost:9200"]}}".
 - beats_pid_dir - Location of beats pid file. Defaults to "/var/run".
 - beats_conf_dir: - Location of conf directory for beats configuration file. Defaults to "/etc/{{beat}}".
-
+- version_lock: Locks the installed version if set to true, thus preventing other processes from updating.  This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required). Defaults to true.
 
 Dependencies
 ------------

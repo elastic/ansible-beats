@@ -25,6 +25,16 @@ describe 'Standard Tests' do
   describe file('/etc/init.d/filebeat') do
     it { should exist }
   end
-  
+
+  if os[:family] == 'redhat'
+    describe command('yum versionlock list | grep filebeat') do
+      its(:stdout) { should_not match /filebeat/ }
+    end
+  elsif ['debian', 'ubuntu'].include?(os[:family])
+    describe command('sudo apt-mark showhold | grep filebeat') do
+      its(:stdout) { should_not match /filebeat/ }
+    end
+  end
+
 end
 

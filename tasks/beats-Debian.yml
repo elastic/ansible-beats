@@ -8,8 +8,9 @@
   apt_repository: repo="deb http://packages.elastic.co/beats/apt stable main" state=present
   when: use_repository
 
-- name: Debian - unhold elasticsearch version for install
+- name: Debian - unhold {{beat}} version for install
   command: apt-mark unhold {{beat}}
+  changed_when: False
 
 - name: Debian - Ensure {{beat}} is installed
   apt: name={{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %} state=present cache_valid_time=86400
@@ -17,9 +18,10 @@
   register: beat_install
   notify: restart beat
 
-- name: Debian - hold elasticsearch version
+- name: Debian - hold {{beat}} version
   command: apt-mark hold {{beat}}
   when: version_lock
+  changed_when: False
 
 - set_fact: os_arch="i386"
 

@@ -11,8 +11,9 @@
 - name: RedHat - install yum-version-lock
   yum: name=yum-plugin-versionlock state=present update_cache=yes
 
-- name: RedHat - unlock beats for install
-  shell: yum versionlock delete {{beat}}
+- name: RedHat - unlock {{beat}} for install
+  shell: yum versionlock delete {{beat}} || true
+  changed_when: False
 
 - name: RedHat - Ensure {{beat}} is installed
   yum: name={{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %} state=present update_cache=yes
@@ -20,9 +21,10 @@
   register: beat_install
   notify: restart beat
 
-- name: RedHat - lock beats version
+- name: RedHat - lock {{beat}} version
   shell: yum versionlock add {{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %}
   when: version_lock
+  changed_when: False
 
 - name: RedHat - Install {{beat}} from url
   yum: name={% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}-{{ beats_version }}-{{ansible_architecture}}.rpm{% endif %} state=present
