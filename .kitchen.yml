@@ -8,6 +8,7 @@ provisioner:
   roles_path: ../
   require_ansible_repo: true
   ansible_verbose: true
+  idempotency_test: true
 
 platforms:
   - name: ubuntu-14.04
