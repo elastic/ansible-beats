@@ -1,3 +1,4 @@
+---
 
 - name: Debian - Add Beats repository key
   apt_key: url="http://packages.elasticsearch.org/GPG-KEY-elasticsearch" state=present

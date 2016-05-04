@@ -1,3 +1,4 @@
+---
 
 - fail: msg="beat must be specified and cannot be blank e.g. filebeat"
   when: beat is not defined or beat == ''

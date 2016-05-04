@@ -1,5 +1,6 @@
-
+---
 # Install OS specific beats
+
 - name: Include specific Beats
   include: beats-debian.yml
   when: ansible_os_family == 'Debian'

@@ -1,3 +1,4 @@
+---
 # Configure Beats Node
 
 - set_fact: pid_file={{ beats_pid_dir }}/{{beat}}.pid

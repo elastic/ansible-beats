@@ -1,5 +1,6 @@
 ---
 # defaults file for beats
+
 version_lock: false
 use_repository: true
 start_service: true
@@ -10,5 +11,3 @@ shipper_conf:
 output_conf: {"elasticsearch":{"hosts":["localhost:9200"]}}
 beats_pid_dir: "/var/run"
 beats_conf_dir: "/etc/{{beat}}"
-
-

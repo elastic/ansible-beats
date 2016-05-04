@@ -1,4 +1,5 @@
 ---
 # vars file for beats
+
 beats_package_url: "https://download.elastic.co/beats"
 es_conf_dir: "/etc"

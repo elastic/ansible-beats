@@ -14,7 +14,7 @@ This role requires:
 
 - Ansible version > 2.0
 - Beats versions 1.x
-- Target machines require access to an external repo, or means 
+- Target machines require access to an external repo, or means
 
 Beats 5.x is currently not supported, although this will be added shortly.
 
@@ -69,11 +69,10 @@ Example playbook is provided below.  This installs Packetbeat and illustrates th
                 },
                 "memcache": {
                   "ports": [11211]
-    
-                }.
+                },
                 "mysql": {
                   "ports": [3306]
-                }.
+                },
                 "pgsql": {
                   "ports": [5432]
                 },
