@@ -1,0 +1,39 @@
+---
+
+- name: Debian - Add Beats repository key
+  apt_key: url="http://packages.elasticsearch.org/GPG-KEY-elasticsearch" state=present
+  when: use_repository
+
+- name: Debian - add beats repository
+  apt_repository: repo="deb http://packages.elastic.co/beats/apt stable main" state=present
+  when: use_repository
+
+- name: Debian - unhold {{beat}} version for install
+  command: apt-mark unhold {{beat}}
+  changed_when: False
+
+- name: Debian - Ensure {{beat}} is installed
+  apt: name={{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %} state=present cache_valid_time=86400
+  when: use_repository
+  register: beat_install
+  notify: restart beat
+
+- name: Debian - hold {{beat}} version
+  command: apt-mark hold {{beat}}
+  when: version_lock
+  changed_when: False
+
+- set_fact: os_arch="i386"
+
+- set_fact: os_arch="amd64"
+  when: ansible_architecture == "x86_64"
+
+- name: Debian - Download {{beat}} from url
+  get_url: url={% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %} dest=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb validate_certs=no
+  when: not use_repository
+
+- name: Debian - Ensure {{beat}} is installed from downloaded package
+  apt: deb=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
+  when: not use_repository
+  register: beat_install
+  notify: restart beat
