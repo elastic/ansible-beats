@@ -3,9 +3,7 @@
 - fail: msg="beat must be specified and cannot be blank e.g. filebeat"
   when: beat is not defined or beat == ''
 
-#When using beats_use_repository=false, and no custom repository, the version must be specified as this used to construct the URL
-- fail: msg="beats_version must be specified when use_repository=false and no custom_package_url is specified"
-  when: beats_version is not defined and use_repository == false and (custom_package_url is not defined or custom_package_url == '')
-
 - fail: msg="beat_conf must be specified"
   when: beat_conf is not defined
+
+- set_fact: "beats_major_version={{ beats_version[0] }}.x"

@@ -17,7 +17,6 @@ describe 'Standard Tests' do
 
   describe file('/etc/filebeat/filebeat.yml') do
     it { should contain 'filebeat:' }
-    it { should contain 'shipper:' }
     it { should contain 'logging:' }
     it { should contain 'output:' }
   end

@@ -2,3 +2,7 @@
 
 default_file: "/etc/default"
 init_script: "/etc/init.d"
+repo_urls:
+  "1.x": "http://packages.elastic.co/beats/apt"
+  "5.x": "https://artifacts.elastic.co/packages/5.x/apt"
+  "6.x": "https://artifacts.elastic.co/packages/6.x/apt"
