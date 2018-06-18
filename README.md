@@ -4,7 +4,7 @@ Beats Role
 This role provides a generic means of installing Elastic supported beats using Ansible.  Currently this includes:
 
 - Filebeat
-- Topbeat
+- MetricBeat (TopBeat in 1.x)
 - Packetbeat
 
 Requirements

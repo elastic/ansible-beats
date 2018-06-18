@@ -17,7 +17,6 @@ describe 'Multi Tests' do
 
   describe file('/etc/filebeat/filebeat.yml') do
     it { should contain 'filebeat:' }
-    it { should contain 'shipper:' }
     it { should contain 'logging:' }
     it { should contain 'output:' }
   end
@@ -26,33 +25,30 @@ describe 'Multi Tests' do
     it { should exist }
   end
 
-  describe service('topbeat') do
+  describe service('metricbeat') do
     it { should be_running }
   end
 
-  describe package('topbeat') do
+  describe package('metricbeat') do
     it { should be_installed }
   end
 
-  describe file('/etc/topbeat/topbeat.yml') do
+  describe file('/etc/metricbeat/metricbeat.yml') do
     it { should be_file }
     it { should be_owned_by 'root' }
   end
 
-  describe file('/etc/topbeat/topbeat.yml') do
-    it { should contain 'input:' }
-    it { should contain 'period: 10' }
-    it { should contain 'stats:' }
-    it { should contain 'system: true' }
-    it { should contain 'process: true' }
-    it { should contain 'filesystem: true' }
-    it { should contain 'cpu_per_core: false' }
-    it { should contain 'shipper:' }
+  describe file('/etc/metricbeat/metricbeat.yml') do
+    it { should contain 'module: system' }
+    it { should contain 'metricsets:' }
+    it { should contain 'period: 10s' }
+    it { should contain 'processes:' }
+    it { should contain 'cpu_ticks:' }
     it { should contain 'logging:' }
     it { should contain 'output:' }
   end
 
-  describe file('/etc/init.d/topbeat') do
+  describe file('/etc/init.d/metricbeat') do
     it { should exist }
   end
 
