@@ -11,6 +11,10 @@
 
 {{ beat_output_conf | to_nice_yaml }}
 
+{% if shipper_conf is defined %}############################# Shipper #########################################
+
+{{ beat_shipper_conf | to_nice_yaml }}
+{% endif %}
 ############################# Logging #########################################
 
 {{ beat_logging_conf | to_nice_yaml }}
