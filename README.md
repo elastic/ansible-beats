@@ -94,6 +94,49 @@ Example playbook is provided below.  This installs Packetbeat and illustrates th
       vars:
         use_repository: "true"
 
+## Testing
+
+This playbook uses [Kitchen](https://kitchen.ci/) for CI and local testing.
+
+### Requirements
+
+* Ruby
+* Bundler
+* Docker
+* Make
+
+### Running the tests
+
+To converge an Ubuntu 18.04 host
+```sh
+$ make converge
+```
+
+To run the tests
+```sh
+$ make verify
+```
+
+To list all of the different test suits
+```sh
+$ make list
+```
+
+The default test suite is Ubuntu 18.04. If you want to test another suite you can override this with the `PATTERN` variable
+```sh
+$ make converge PATTERN=standard-centos-7
+```
+
+The `PATTERN` is a kitchen pattern which can match multiple suites. To run all tests for CentOS
+```sh
+$ make converge PATTERN=centos-7
+```
+
+When you are finished testing you can clean up everything with
+```sh
+$ make destroy-all
+```
+
 License
 -------
 
