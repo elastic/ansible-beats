@@ -5,7 +5,7 @@ driver:
 provisioner:
   name: ansible_playbook
   hosts: localhost
-  roles_path: ./
+  role_name: ansible-beats
   require_ansible_repo: true
   ansible_verbose: true
   idempotency_test: true
