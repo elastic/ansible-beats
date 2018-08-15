@@ -56,33 +56,36 @@ Example playbook is provided below.  This installs Packetbeat and illustrates th
       roles:
         - { role: beats, beat: "packetbeat",
             beat_conf: {
-              "interfaces": {"device":"any"},
-              "protocols": {
-                "dns": {
-                  "ports": [53],
-                  "include_authorities":true
-                },
-                "http": {
-                  "ports": [80, 8080, 8000, 5000, 8002]
-                },
-                "memcache": {
-                  "ports": [11211]
-                },
-                "mysql": {
-                  "ports": [3306]
-                },
-                "pgsql": {
-                  "ports": [5432]
-                },
-                "redis": {
-                  "ports": [6379]
-                },
-                "thrift": {
-                  "ports": [9090]
-                },
-                "mongodb": {
-                  "ports": [27017]
-                }
+              "packetbeat":{
+                "interfaces": {"device":"any"},
+                "protocols": [
+                  {
+                    "type": "dns",
+                    "ports": [53],
+                    "include_authorities": true
+                  }, {
+                    "type": "http",
+                    "ports": [80, 8080, 8000, 5000, 8002]
+                  }, {
+                    "type": "memcache",
+                    "ports": [11211]
+                  }, {
+                    "type": "mysql",
+                    "ports": [3306]
+                  }, {
+                    "type": "pgsql",
+                    "ports": [5432]
+                  }, {
+                    "type": "redis",
+                    "ports": [6379]
+                  }, {
+                    "type": "thrift",
+                    "ports": [9090]
+                  }, {
+                    "type": "mongodb",
+                    "ports": [27017]
+                  }
+                ]
               }
             },
             output_conf : {
