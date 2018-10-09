@@ -16,7 +16,6 @@ describe 'Config Tests' do
   end
 
   describe file('/etc/packetbeat/packetbeat.yml') do
-    it { should contain 'shipper:' }
     it { should contain 'logging:' }
     it { should contain 'output:' }
     it { should contain 'protocols:' }

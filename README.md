@@ -4,7 +4,7 @@ Beats Role
 This role provides a generic means of installing Elastic supported beats using Ansible.  Currently this includes:
 
 - Filebeat
-- Topbeat
+- MetricBeat (TopBeat in 1.x)
 - Packetbeat
 
 Requirements
@@ -13,10 +13,8 @@ Requirements
 This role requires:
 
 - Ansible version > 2.0
-- Beats versions 1.x
+- Beats version >= 1.x
 - Target machines require access to an external repo, or means
-
-Beats 5.x is currently not supported, although this will be added shortly.
 
 The following OS are currently actively tested using kitchen:
 
@@ -36,7 +34,7 @@ Supported variables are as follows:
 - restart_on_change - Changes to configuration or installed versions, will result in a restart if true.  Defaults to true.
 - daemon_args - Applicable to version 1.x of beats.  Allows run time params to be passed to beats.
 - logging_conf - Logging configuration.  Should be defined as a map - see Example playbook below.  Map is serialized into logging section of beat config. Defaults to "{"files":{"rotateeverybytes":10485760}}"
-- shipper_conf - Shipper configuration. Should be defined as a map - see Example playbook below. Map is serialized into shipper section of beat config. Defaults to "".
+- shipper_conf - Applicable to version 1.x of beats.  Shipper configuration. Should be defined as a map - see Example playbook below. Map is serialized into shipper section of beat config. Defaults to "".
 - output_conf - Output configuration. Should be defined as a map - see Example playbook below. Map is serialized into output section of beat config. Defaults to "{"elasticsearch":{"hosts":["localhost:9200"]}}".
 - beats_pid_dir - Location of beats pid file. Defaults to "/var/run".
 - beats_conf_dir: - Location of conf directory for beats configuration file. Defaults to "/etc/{{beat}}".
@@ -46,7 +44,7 @@ Dependencies
 ------------
 
 - Ansible version > 2.0
-- Beats versions 1.x
+- Beats version >= 1.x
 
 Example Playbook
 ----------------
@@ -95,6 +93,49 @@ Example playbook is provided below.  This installs Packetbeat and illustrates th
         }
       vars:
         use_repository: "true"
+
+## Testing
+
+This playbook uses [Kitchen](https://kitchen.ci/) for CI and local testing.
+
+### Requirements
+
+* Ruby
+* Bundler
+* Docker
+* Make
+
+### Running the tests
+
+To converge an Ubuntu 18.04 host
+```sh
+$ make converge
+```
+
+To run the tests
+```sh
+$ make verify
+```
+
+To list all of the different test suits
+```sh
+$ make list
+```
+
+The default test suite is Ubuntu 18.04. If you want to test another suite you can override this with the `PATTERN` variable
+```sh
+$ make converge PATTERN=standard-centos-7
+```
+
+The `PATTERN` is a kitchen pattern which can match multiple suites. To run all tests for CentOS
+```sh
+$ make converge PATTERN=centos-7
+```
+
+When you are finished testing you can clean up everything with
+```sh
+$ make destroy-all
+```
 
 License
 -------
