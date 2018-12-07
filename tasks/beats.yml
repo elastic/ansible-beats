@@ -13,8 +13,13 @@
 - name: Beats configuration
   include: beats-config.yml
 
+- name: Filebeat modules
+  include: filebeat.yml
+  when: beat == "filebeat"
+
 # Make sure the service is started, and restart if necessary
 - name: Start beats service
   service: name={{ beat }} state=started enabled=yes
   when: start_service
   register: beats_started
+

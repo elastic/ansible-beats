@@ -1,0 +1,35 @@
+---
+
+#Filebeat specific tasks
+
+- name: Disable filebeat modules
+  shell: /usr/bin/filebeat modules disable {{ item.1 }}
+  args:
+    creates: "{{ beats_conf_dir }}/modules.d/{{ item.1 }}.yml.disabled"
+  notify: restart beat
+  when:
+    - item.0.groupname in group_names
+  with_subelements:
+    - "{{ filebeat_modules|default([]) }}"
+    - disable
+    - skip_missing: True
+
+- name: Enable filebeat modules
+  shell: /usr/bin/filebeat modules enable {{ item.1 }}
+  args:
+    creates: "{{ beats_conf_dir }}/modules.d/{{ item.1 }}.yml"
+  notify: restart beat
+  when: 
+    - item.0.groupname in group_names
+  with_subelements:
+    - "{{ filebeat_modules|default([]) }}"
+    - enable
+    - skip_missing: True
+
+- name: Run filebeat setup
+  shell: /usr/bin/filebeat setup && touch {{ beats_conf_dir }}/ansible_filebeat_setup_complete.txt
+  args:
+    creates: "{{ beats_conf_dir }}/ansible_filebeat_setup_complete.txt"
+  when:
+    - filebeat_setup | default(true)
+    - filebeat_setup_group | default("kibana") in group_names

@@ -40,6 +40,12 @@ Supported variables are as follows:
 - beats_conf_dir: - Location of conf directory for beats configuration file. Defaults to "/etc/{{beat}}".
 - version_lock: Locks the installed version if set to true, thus preventing other processes from updating.  This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required). Defaults to true.
 
+The following variables only affect filebeat:
+
+- filebeat_modules: A list of modules to enable or disable, per inventory group. See example syntax in defaults/main.yml. Defaults to empty.
+- filebeat_setup: Whether to run the command "filebeat setup", which will load dashboards into Kibana. Defaults to true. However, contingent on there being servers in the filebeat_setup_group (see next variable).
+- filebeat_setup_group: The command "filebeat setup" runs on the servers in this group. Defaults to "kibana". In other words - in your ansible inventory place some filebeat servers into the "kibana" group, and then "filebeat setup" will run as a one-time action.
+
 Dependencies
 ------------
 
