@@ -47,13 +47,3 @@
   register: beat_install
   notify: restart beat
   when: not use_repository
-
-- name: win - Start beats service
-  win_nssm:
-    name: "{{ beat }}"
-    state: restarted
-    start_mode: auto
-    application: "{{beats_home_dir}}\\{{beat}}.exe"
-    app_parameters_free_form: "-c {{conf_file}} {{daemon_args}}"
-  when: not use_repository and os_type == 'win' and start_service
-  register: beats_started

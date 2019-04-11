@@ -95,7 +95,7 @@ Example playbook is provided below.  This installs Packetbeat and illustrates th
             }
         }
       vars:
-        use_repository: "true"
+        use_repository: true
 
 ## Testing
 
