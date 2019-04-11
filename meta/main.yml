@@ -20,5 +20,8 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - all
+  - name: Windows
+    versions:
+    - all
   categories:
     - system

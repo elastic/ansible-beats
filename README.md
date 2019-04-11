@@ -3,9 +3,11 @@ Beats Role
 
 This role provides a generic means of installing Elastic supported beats using Ansible.  Currently this includes:
 
-- Filebeat
-- MetricBeat (TopBeat in 1.x)
-- Packetbeat
+- [Filebeat](https://www.elastic.co/cn/products/beats/filebeat)
+- [MetricBeat (TopBeat in 1.x)](https://www.elastic.co/cn/products/beats/metricbeat)
+- [Packetbeat](https://www.elastic.co/cn/products/beats/packetbeat)
+- [Heartbeat](https://www.elastic.co/cn/products/beats/heartbeat)
+- [winlogbeat](https://www.elastic.co/cn/products/beats/winlogbeat)
 
 Requirements
 ------------
@@ -18,9 +20,10 @@ This role requires:
 
 The following OS are currently actively tested using kitchen:
 
-- Centos 6 & 7
-- Debian 7 & 8
-- Ubuntu 14.04
+- Centos 6 & 7 +
+- Debian 7 & 8 +
+- Ubuntu 14.04 +
+- Windows 2008R2 +
 
 The above list is subject to change.
 

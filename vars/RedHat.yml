@@ -6,3 +6,4 @@ repo_urls:
   "1.x": "https://packages.elastic.co/beats/yum/el/$basearch"
   "5.x": "https://artifacts.elastic.co/packages/5.x/yum"
   "6.x": "https://artifacts.elastic.co/packages/6.x/yum"
+  "7.x": "https://artifacts.elastic.co/packages/7.x/yum"

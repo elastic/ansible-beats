@@ -1,0 +1,59 @@
+---
+- name: Windows - Ensure {{beat}} is installed 
+  win_chocolatey:
+    name: "{{beat}}"
+    state: present
+    version: "{{beats_version}}"
+  when: use_repository
+  register: beat_install
+  notify: restart beat
+
+- name: Windows - nssm is installed
+  win_chocolatey:
+    name: nssm
+    state: present
+  register: nssm_install
+  when: not use_repository
+
+- set_fact: os_arch="x86"
+
+- set_fact: os_arch="x86_64"
+  when: ansible_architecture == "64-bit"
+
+- name: Windows - Create {{beat}} dir
+  win_file:
+      path: "{{beats_home_dir}}"
+      state: directory
+  when: not use_repository
+
+- name: Windows - Download {{beat}} from url
+  win_get_url: 
+    url: "{% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}-{{ beats_version }}-windows-{{os_arch}}.zip{% endif %}"
+    dest: "%TEMP%\\{{beat}}-{{ beats_version }}-windows-{{os_arch}}.zip"
+  when: not use_repository
+
+- name: Windows - Ensure {{beat}} is installed from downloaded package
+  win_unzip:
+    src: "%TEMP%\\{{beat}}-{{ beats_version }}-windows-{{os_arch}}.zip"
+    dest: "%TEMP%\\"
+  when: not use_repository
+
+- name: Move {{beats_home_dir}}\\{{beat}}-{{ beats_version }}-windows-{{os_arch}} to {{beats_home_dir}}
+  win_copy:
+    remote_src: yes
+    src: "%TEMP%\\{{beat}}-{{ beats_version }}-windows-{{os_arch}}\\"
+    dest: "{{beats_home_dir}}\\"
+    force: no
+  register: beat_install
+  notify: restart beat
+  when: not use_repository
+
+- name: win - Start beats service
+  win_nssm:
+    name: "{{ beat }}"
+    state: restarted
+    start_mode: auto
+    application: "{{beats_home_dir}}\\{{beat}}.exe"
+    app_parameters_free_form: "-c {{conf_file}} {{daemon_args}}"
+  when: not use_repository and os_type == 'win' and start_service
+  register: beats_started
