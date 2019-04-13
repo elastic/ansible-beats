@@ -1,4 +1,12 @@
 ---
+- set_fact: beat_name="{{ beat }}"
+- name: Windows - Ensure WinPcap is installed before install packetbeat
+  win_chocolatey:
+    name: nmap
+    state: present
+    version: 7.12
+  when: beat_name == "packetbeat"
+
 - name: Windows - Ensure {{beat}} is installed 
   win_chocolatey:
     name: "{{beat}}"
