@@ -15,13 +15,13 @@
   register: pid_stat
   when: os_type == 'unix' 
 
-- win_stat: path={{beats_pid_dir}}
-  register: pid_stat
-  when: os_type == 'win' 
-
 - name: Create PID Directory
   file: path={{ beats_pid_dir }} state=directory
   when: os_type == 'unix' and pid_stat.stat.isdir is not defined
+
+- win_stat: path={{beats_pid_dir}}
+  register: pid_stat
+  when: os_type == 'win' 
 
 - name: Create PID Directory
   win_file:  path={{ beats_pid_dir }} state=directory
