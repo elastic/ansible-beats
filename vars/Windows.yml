@@ -1,6 +1,6 @@
 ---
-beats_home_dir: "C:\\beats\\{{beat}}"
-beats_pid_dir: "{{beats_home_dir}}\\pids"
-beats_conf_dir: "{{beats_home_dir}}\\config"
-default_file: "{{beats_home_dir}}\\config"
+beats_home_dir: "C:\\beats\\{{ beat }}"
+beats_pid_dir: "{{ beats_home_dir }}\\pids"
+beats_conf_dir: "{{ beats_home_dir }}\\config"
+default_file: "{{ beats_home_dir }}\\config"
 os_type: win

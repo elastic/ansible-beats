@@ -2,7 +2,7 @@
 # Install OS specific beats
 
 - name: Include specific Beats
-  include: beats-{{ansible_os_family}}.yml
+  include: beats-{{ ansible_os_family }}.yml
 
 #Configuration file for beats
 - name: Beats configuration
@@ -27,7 +27,7 @@
     name: "{{ beat }}"
     state: restarted
     start_mode: auto
-    application: "{{beats_home_dir}}\\{{beat}}.exe"
-    app_parameters_free_form: "-c {{conf_file}} {{daemon_args}}"
+    application: "{{ beats_home_dir }}\\{{ beat }}.exe"
+    app_parameters_free_form: "-c {{ conf_file }} {{ daemon_args }}"
   when: not use_repository and os_type == 'win' and start_service
   register: beats_started

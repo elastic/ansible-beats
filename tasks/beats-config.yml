@@ -1,9 +1,9 @@
 ---
 # Configure Beats Node
 
-- set_fact: pid_file={{ beats_pid_dir }}/{{beat}}.pid
-- set_fact: instance_default_file={{ default_file }}/{{beat}}
-- set_fact: conf_file={{ beats_conf_dir }}/{{beat}}.yml
+- set_fact: pid_file={{ beats_pid_dir }}/{{ beat }}.pid
+- set_fact: instance_default_file={{ default_file }}/{{ beat }}
+- set_fact: conf_file={{ beats_conf_dir }}/{{ beat }}.yml
 
 - set_fact: beat_output_conf={{ output_conf | merge_config('output') }}
 - set_fact: beat_shipper_conf={{ shipper_conf | merge_config('shipper') }}
@@ -11,7 +11,7 @@
 - set_fact: beat_logging_conf={{ logging_conf | merge_config('logging') }}
 
 ## pid stat
-- stat: path={{beats_pid_dir}}
+- stat: path={{ beats_pid_dir }}
   register: pid_stat
   when: os_type == 'unix' 
 
@@ -19,9 +19,9 @@
   file: path={{ beats_pid_dir }} state=directory
   when: os_type == 'unix' and pid_stat.stat.isdir is not defined
 
-- win_stat: path={{beats_pid_dir}}
+- win_stat: path={{ beats_pid_dir }}
   register: pid_stat
-  when: os_type == 'win' 
+  when: os_type == 'win'
 
 - name: Create PID Directory
   win_file:  path={{ beats_pid_dir }} state=directory
@@ -31,20 +31,20 @@
 
 - name: Create Config Directory
   file: path={{ beats_conf_dir }} state=directory
-  when: os_type == 'unix' 
+  when: os_type == 'unix'
 
 - name: Create Config Directory
-  win_file: 
+  win_file:
     path: "{{ beats_conf_dir }}"
     state: directory
   when: os_type == 'win' 
 
 #Copy the default file
 - name: Copy Default File for Instance
-  template: src=beat.j2 dest={{instance_default_file}} mode=0644 force=yes owner=root group=root
+  template: src=beat.j2 dest={{ instance_default_file }} mode=0644 force=yes owner=root group=root
   notify: restart beat
 
 #Copy templated config file
 - name: Copy Configuration File
-  template: src=beat.yml.j2 dest={{conf_file}} mode=0644 force=yes owner=root group=root
+  template: src=beat.yml.j2 dest={{ conf_file }} mode=0644 force=yes owner=root group=root
   notify: restart beat

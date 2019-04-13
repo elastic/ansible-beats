@@ -35,11 +35,11 @@ Supported variables are as follows:
 - start_service - service will be started if true, false otherwise.  Defaults to true.
 - restart_on_change - Changes to configuration or installed versions, will result in a restart if true.  Defaults to true.
 - daemon_args - Applicable to version 1.x of beats.  Allows run time params to be passed to beats.
-- logging_conf - Logging configuration.  Should be defined as a map - see Example playbook below.  Map is serialized into logging section of beat config. Defaults to "{"files":{"rotateeverybytes":10485760}}"
+- logging_conf - Logging configuration.  Should be defined as a map - see Example playbook below.  Map is serialized into logging section of beat config. Defaults to "{"files":{"rotateeverybytes":10485760 }}"
 - shipper_conf - Applicable to version 1.x of beats.  Shipper configuration. Should be defined as a map - see Example playbook below. Map is serialized into shipper section of beat config. Defaults to "".
-- output_conf - Output configuration. Should be defined as a map - see Example playbook below. Map is serialized into output section of beat config. Defaults to "{"elasticsearch":{"hosts":["localhost:9200"]}}".
+- output_conf - Output configuration. Should be defined as a map - see Example playbook below. Map is serialized into output section of beat config. Defaults to "{"elasticsearch":{"hosts":["localhost:9200"] }}".
 - beats_pid_dir - Location of beats pid file. Defaults to "/var/run".
-- beats_conf_dir: - Location of conf directory for beats configuration file. Defaults to "/etc/{{beat}}".
+- beats_conf_dir: - Location of conf directory for beats configuration file. Defaults to "/etc/{{ beat }}".
 - version_lock: Locks the installed version if set to true, thus preventing other processes from updating.  This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required). Defaults to true.
 
 Dependencies

@@ -7,11 +7,11 @@
     version: 7.12
   when: beat_name == "packetbeat"
 
-- name: Windows - Ensure {{beat}} is installed 
+- name: Windows - Ensure {{ beat }} is installed
   win_chocolatey:
-    name: "{{beat}}"
+    name: "{{ beat }}"
     state: present
-    version: "{{beats_version}}"
+    version: "{{ beats_version }}"
   when: use_repository
   register: beat_install
   notify: restart beat
@@ -28,29 +28,29 @@
 - set_fact: os_arch="x86_64"
   when: ansible_architecture == "64-bit"
 
-- name: Windows - Create {{beat}} dir
+- name: Windows - Create {{ beat }} dir
   win_file:
-      path: "{{beats_home_dir}}"
+      path: "{{ beats_home_di r }}"
       state: directory
   when: not use_repository
 
-- name: Windows - Download {{beat}} from url
+- name: Windows - Download {{ beat }} from url
   win_get_url: 
-    url: "{% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}-{{ beats_version }}-windows-{{os_arch}}.zip{% endif %}"
-    dest: "%TEMP%\\{{beat}}-{{ beats_version }}-windows-{{os_arch}}.zip"
+    url: "{% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{ beat }}/{{ beat }}-{{ beats_version }}-windows-{{ os_arch }}.zip{% endif %}"
+    dest: "%TEMP%\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }}.zip"
   when: not use_repository
 
-- name: Windows - Ensure {{beat}} is installed from downloaded package
+- name: Windows - Ensure {{ beat }} is installed from downloaded package
   win_unzip:
-    src: "%TEMP%\\{{beat}}-{{ beats_version }}-windows-{{os_arch}}.zip"
+    src: "%TEMP%\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }}.zip"
     dest: "%TEMP%\\"
   when: not use_repository
 
-- name: Move {{beats_home_dir}}\\{{beat}}-{{ beats_version }}-windows-{{os_arch}} to {{beats_home_dir}}
+- name: Move {{ beats_home_di r }}\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }} to {{ beats_home_di r }}
   win_copy:
     remote_src: yes
-    src: "%TEMP%\\{{beat}}-{{ beats_version }}-windows-{{os_arch}}\\"
-    dest: "{{beats_home_dir}}\\"
+    src: "%TEMP%\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }}\\"
+    dest: "{{ beats_home_di r }}\\"
     force: no
   register: beat_install
   notify: restart beat
