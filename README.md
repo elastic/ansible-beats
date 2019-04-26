@@ -51,7 +51,7 @@ Example Playbook
 
 Example playbook is provided below.  This installs Packetbeat and illustrates the need for configuration sections to be specified as maps.
 
-    - name: Example playbook for installing packetbear
+    - name: Example playbook for installing packetbeat
       hosts: localhost
       roles:
         - { role: beats, beat: "packetbeat",
