@@ -43,11 +43,11 @@
         - linux
     - axis:
         name: OS
-        filename: test/matrix.yml
+        filename: ansible-beats/test/matrix.yml
         type: yaml
     - axis:
         name: TEST_TYPE
-        filename: test/matrix.yml
+        filename: ansible-beats/test/matrix.yml
         type: yaml
     wrappers:
     - ansicolor
