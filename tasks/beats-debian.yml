@@ -1,10 +1,5 @@
 ---
 
-- name: "Debian - check that beats {{ beats_major_version }} version exists"
-  assert:
-    that:
-      "repo_urls[beats_major_version] is defined"
-
 - name: Debian - Ensure apt-transport-https is installed
   apt: name=apt-transport-https state=present cache_valid_time=86400
   when: use_repository
@@ -16,7 +11,7 @@
   when: use_repository
 
 - name: Debian - add beats repository
-  apt_repository: repo="deb {{ repo_urls[beats_major_version] }} stable main" state=present
+  apt_repository: repo="deb {{ repo_url }} stable main" state=present
   when: use_repository
 
 - name: Debian - unhold {{beat}} version for install

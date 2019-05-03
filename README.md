@@ -47,7 +47,7 @@ Dependencies
 ------------
 
 - Ansible version > 2.0
-- Beats version >= 1.x
+- Beats version >= 6.x
 
 Example Playbook
 ----------------
