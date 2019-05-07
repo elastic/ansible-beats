@@ -31,7 +31,7 @@ Supported variables are as follows:
 
 - **beat** (*MANDATORY*): Beat product. Supported values are: "filebeat", "metricbeat" & "packetbeat".
 - **beat_conf** (*MANDATORY*): Beat Configuration. Should be defined as a map (see [Example Playbook](#example-playbook))
-- **beats_version** (*Defaults to `6.2.4`*): Beats version. **Beats 7.x is not yet supported**.
+- **beats_version** (*Defaults to `7.0.0`*): Beats version.
 - **version_lock** (*Defaults to `false`*): Locks the installed version if set to true, thus preventing other processes from updating. This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required).
 - **use_repository** (*Defaults to `true`*): Use elastic repo for yum or apt if true. If false, a custom custom_package_url must be provided.
 - **start_service** (*Defaults to `true`*): service will be started if true, false otherwise.
@@ -47,7 +47,7 @@ Dependencies
 ------------
 
 - Ansible version > 2.0
-- Beats version >= 1.x
+- Beats version >= 6.x
 
 Example Playbook
 ----------------
