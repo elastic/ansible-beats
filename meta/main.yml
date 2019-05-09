@@ -21,4 +21,8 @@ galaxy_info:
     versions:
     - all
   categories:
-    - system
+    - beats
+    - elastic
+    - elk
+    - logging
+    - monitoring
