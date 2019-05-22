@@ -1,0 +1,31 @@
+---
+- job:
+    name: elastic+ansible-beats+pull-request
+    display-name: elastic / ansible-beats - pull-request
+    description: Pull request testing with test kitchen
+    parameters: []
+    scm:
+    - git:
+        branches:
+        - $ghprbActualCommit
+        refspec: +refs/pull/*:refs/remotes/origin/pr/*
+    triggers:
+    - github-pull-request:
+        github-hooks: true
+        org-list:
+        - elastic
+        allow-whitelist-orgs-as-admins: true
+        cancel-builds-on-update: true
+        status-context: devops-ci
+    builders:
+    - shell: |-
+        #!/usr/local/bin/runbld
+        set -euo pipefail
+
+        export RBENV_VERSION='2.3.0'
+        export PATH="$HOME/.rbenv/bin:$PATH"
+        eval "$(rbenv init -)"
+        rbenv local $RBENV_VERSION
+
+        make setup
+        make verify PATTERN=$TEST_TYPE-$OS
