@@ -15,6 +15,9 @@
 
 # Make sure the service is started, and restart if necessary
 - name: Start beats service
-  service: name={{ beat }} state=started enabled=yes
-  when: start_service
+  service:
+    name: "{{ beat }}"
+    state: started
+    enabled: yes
+  when: start_service | bool
   register: beats_started
