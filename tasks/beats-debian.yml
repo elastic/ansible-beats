@@ -6,6 +6,18 @@
   register: beat_install
   notify: restart beat
 
+- name: Debian - Ensure python-urllib3, python-openssl, python-pyasn1 & python-pip are installed
+  apt:
+    name: python-urllib3,python-openssl,python-pyasn1,python-pip
+    state: present
+  when: use_repository and ansible_distribution_release == "trusty"
+
+- name: Debian - ensure ndg-httpsclient pip is installed
+  pip:
+    name: ndg-httpsclient
+    state: present
+  when: use_repository and ansible_distribution_release == "trusty"
+
 - name: Debian - Add Beats repository key
   apt_key: 
     url: "{{ repo_key }}"
