@@ -30,7 +30,7 @@
 
 - name: Windows - Create {{ beat }} dir
   win_file:
-      path: "{{ beats_home_di r }}"
+      path: "{{ beats_home_dir }}"
       state: directory
   when: not use_repository
 
@@ -46,7 +46,7 @@
     dest: "%TEMP%\\"
   when: not use_repository
 
-- name: Move {{ beats_home_di r }}\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }} to {{ beats_home_di r }}
+- name: Move {{ beats_home_dir }}\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }} to {{ beats_home_dir }}
   win_copy:
     remote_src: yes
     src: "%TEMP%\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }}\\"
