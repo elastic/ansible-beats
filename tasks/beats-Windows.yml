@@ -50,7 +50,7 @@
   win_copy:
     remote_src: yes
     src: "%TEMP%\\{{ beat }}-{{ beats_version }}-windows-{{ os_arch }}\\"
-    dest: "{{ beats_home_di r }}\\"
+    dest: "{{ beats_home_dir }}\\"
     force: no
   register: beat_install
   notify: restart beat
