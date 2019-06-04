@@ -3,10 +3,10 @@ Beats Role
 
 This role provides a generic means of installing Elastic supported beats using Ansible.  Currently this includes:
 
-- [Filebeat](https://www.elastic.co/cn/products/beats/filebeat)
-- [MetricBeat (TopBeat in 1.x)](https://www.elastic.co/cn/products/beats/metricbeat)
-- [Packetbeat](https://www.elastic.co/cn/products/beats/packetbeat)
-- [Heartbeat](https://www.elastic.co/cn/products/beats/heartbeat)
+- [Filebeat](https://www.elastic.co/products/beats/filebeat)
+- [MetricBeat (TopBeat in 1.x)](https://www.elastic.co/products/beats/metricbeat)
+- [Packetbeat](https://www.elastic.co/products/beats/packetbeat)
+- [Heartbeat](https://www.elastic.co/products/beats/heartbeat)
 
 Requirements
 ------------
