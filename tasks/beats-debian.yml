@@ -1,22 +1,31 @@
 ---
 
-- name: "Debian - check that beats {{ beats_major_version }} version exists"
-  assert:
-    that:
-      "repo_urls[beats_major_version] is defined"
-
 - name: Debian - Ensure apt-transport-https is installed
   apt: name=apt-transport-https state=present cache_valid_time=86400
   when: use_repository
   register: beat_install
   notify: restart beat
 
+- name: Debian - Ensure python-urllib3, python-openssl, python-pyasn1 & python-pip are installed
+  apt:
+    name: python-urllib3,python-openssl,python-pyasn1,python-pip
+    state: present
+  when: use_repository and ansible_distribution_release == "trusty"
+
+- name: Debian - ensure ndg-httpsclient pip is installed
+  pip:
+    name: ndg-httpsclient
+    state: present
+  when: use_repository and ansible_distribution_release == "trusty"
+
 - name: Debian - Add Beats repository key
-  apt_key: url="http://packages.elasticsearch.org/GPG-KEY-elasticsearch" state=present
+  apt_key: 
+    url: "{{ repo_key }}"
+    state: present
   when: use_repository
 
 - name: Debian - add beats repository
-  apt_repository: repo="deb {{ repo_urls[beats_major_version] }} stable main" state=present
+  apt_repository: repo="deb {{ repo_url }} stable main" state=present
   when: use_repository
 
 - name: Debian - unhold {{beat}} version for install
