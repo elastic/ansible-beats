@@ -35,7 +35,6 @@
 - name: Debian - Ensure {{beat}} is installed
   apt: name={{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %} state=present cache_valid_time=86400
   when: use_repository
-  register: beat_install
   notify: restart beat
 
 - name: Debian - hold {{beat}} version
@@ -55,5 +54,4 @@
 - name: Debian - Ensure {{beat}} is installed from downloaded package
   apt: deb=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
   when: not use_repository
-  register: beat_install
   notify: restart beat
