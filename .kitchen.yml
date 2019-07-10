@@ -79,6 +79,13 @@ suites:
         - "."
     run_list:
     attributes:
+  - name: standard-6x
+    provisioner:
+      playbook: test/integration/standard-6x.yml
+      additional_copy_path:
+        - "."
+    run_list:
+    attributes:
   - name: multi
     provisioner:
       playbook: test/integration/multi.yml

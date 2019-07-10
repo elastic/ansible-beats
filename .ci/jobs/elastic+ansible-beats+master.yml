@@ -1,0 +1,19 @@
+---
+- job:
+    name: elastic+ansible-beats+master
+    display-name: elastic / ansible-beats - master
+    description: Master branch testing with test kitchen
+    triggers:
+    - timed: H H(02-04) * * *
+    builders:
+    - shell: |-
+        #!/usr/local/bin/runbld
+        set -euo pipefail
+
+        export RBENV_VERSION='2.3.0'
+        export PATH="$HOME/.rbenv/bin:$PATH"
+        eval "$(rbenv init -)"
+        rbenv local $RBENV_VERSION
+
+        make setup
+        make verify PATTERN=$TEST_TYPE-$OS

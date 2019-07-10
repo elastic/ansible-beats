@@ -19,8 +19,8 @@ This role requires:
 The following OS are currently actively tested using kitchen:
 
 - Centos 6 & 7
-- Debian 7 & 8
-- Ubuntu 14.04
+- Debian 8 & 9
+- Ubuntu 14.04, 16.04 & 18.04
 
 The above list is subject to change.
 
@@ -29,29 +29,32 @@ Role Variables
 
 Supported variables are as follows:
 
-- use_repository - use elastic repo for yum or apt if true. If false, a custom custom_package_url must be provided. Defaults to true.
-- start_service - service will be started if true, false otherwise.  Defaults to true.
-- restart_on_change - Changes to configuration or installed versions, will result in a restart if true.  Defaults to true.
-- daemon_args - Applicable to version 1.x of beats.  Allows run time params to be passed to beats.
-- logging_conf - Logging configuration.  Should be defined as a map - see Example playbook below.  Map is serialized into logging section of beat config. Defaults to "{"files":{"rotateeverybytes":10485760}}"
-- shipper_conf - Applicable to version 1.x of beats.  Shipper configuration. Should be defined as a map - see Example playbook below. Map is serialized into shipper section of beat config. Defaults to "".
-- output_conf - Output configuration. Should be defined as a map - see Example playbook below. Map is serialized into output section of beat config. Defaults to "{"elasticsearch":{"hosts":["localhost:9200"]}}".
-- beats_pid_dir - Location of beats pid file. Defaults to "/var/run".
-- beats_conf_dir: - Location of conf directory for beats configuration file. Defaults to "/etc/{{beat}}".
-- version_lock: Locks the installed version if set to true, thus preventing other processes from updating.  This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required). Defaults to true.
+- **beat** (*MANDATORY*): Beat product. Supported values are: "filebeat", "metricbeat" & "packetbeat".
+- **beat_conf** (*MANDATORY*): Beat Configuration. Should be defined as a map (see [Example Playbook](#example-playbook))
+- **beats_version** (*Defaults to `7.0.0`*): Beats version.
+- **version_lock** (*Defaults to `false`*): Locks the installed version if set to true, thus preventing other processes from updating. This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required).
+- **use_repository** (*Defaults to `true`*): Use elastic repo for yum or apt if true. If false, a custom custom_package_url must be provided.
+- **start_service** (*Defaults to `true`*): service will be started if true, false otherwise.
+- **restart_on_change** (*Defaults to `true`*): Changes to configuration or installed versions, will result in a restart if true.
+- **daemon_args** (*Applicable to version 1.x of beats*): Allows run time params to be passed to beats.
+- **logging_conf** (*Defaults to `{"files":{"rotateeverybytes":10485760}}`*): Logging configuration. Should be defined as a map (see [Example Playbook](#example-playbook)). Map is serialized into logging section of beat config.
+- **shipper_conf** (*Applicable to version 1.x of beats*): Shipper configuration. Should be defined as a map (see [Example Playbook](#example-playbook)). Map is serialized into shipper section of beat config.
+- **output_conf** (*Defaults to `{"elasticsearch":{"hosts":["localhost:9200"]}}`): Output configuration. Should be defined as a map (see [Example Playbook](#example-playbook)). Map is serialized into output section of beat config.
+- **beats_pid_dir** (*Defaults to `/var/run`*): Location of beats pid file.
+- **beats_conf_dir** (*Defaults to `/etc/{beat}`*): Location of conf directory for beats configuration file.
 
 Dependencies
 ------------
 
 - Ansible version > 2.0
-- Beats version >= 1.x
+- Beats version >= 6.x
 
 Example Playbook
 ----------------
 
-Example playbook is provided below.  This installs Packetbeat and illustrates the need for configuration sections to be specified as maps.
+Example playbook is provided below. This installs Packetbeat and illustrates the need for configuration sections to be specified as maps.
 
-    - name: Example playbook for installing packetbear
+    - name: Example playbook for installing packetbeat
       hosts: localhost
       roles:
         - { role: beats, beat: "packetbeat",
