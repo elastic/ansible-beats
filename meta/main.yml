@@ -1,9 +1,9 @@
 ---
-# handlers file for beats
 
 allow_duplicates: yes
 
 galaxy_info:
+  role_name: beats
   author: Dale McDiarmid
   description: Beats for Linux
   company: "Elastic.co"
@@ -21,4 +21,8 @@ galaxy_info:
     versions:
     - all
   categories:
-    - system
+    - beats
+    - elastic
+    - elk
+    - logging
+    - monitoring

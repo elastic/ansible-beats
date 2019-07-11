@@ -2,7 +2,4 @@
 
 default_file: "/etc/sysconfig"
 init_script: "/etc/init.d"
-repo_urls:
-  "1.x": "https://packages.elastic.co/beats/yum/el/$basearch"
-  "5.x": "https://artifacts.elastic.co/packages/5.x/yum"
-  "6.x": "https://artifacts.elastic.co/packages/6.x/yum"
+repo_url: "https://artifacts.elastic.co/packages/{{ beats_major_version }}/yum"

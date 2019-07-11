@@ -8,5 +8,6 @@ OS:
   - centos-7
 TEST_TYPE:
   - standard
+  - standard-6x
   - multi
   - config
