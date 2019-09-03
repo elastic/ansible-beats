@@ -2,4 +2,4 @@
 # vars file for beats
 
 beats_package_url: "https://download.elastic.co/beats"
-repo_key: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+elastic_repo_key: "https://packages.elastic.co/GPG-KEY-elasticsearch"
