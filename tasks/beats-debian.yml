@@ -20,7 +20,7 @@
 
 - name: Debian - Add Beats repository key
   apt_key:
-    url: "{{ repo_key }}"
+    url: "{{ elastic_repo_key }}"
     state: present
   when: use_repository
 
