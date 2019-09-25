@@ -4,5 +4,5 @@
   roles:
     - { role: "ansible-beats", beat: "filebeat", beat_conf: {"filebeat": {"prospectors":[{"paths":["/var/log/*.log"],"input_type":"log"}], "registry_file": "/var/lib/filebeat/registry"} } }
   vars:
-    beats_version: 6.7.1
+    beats_version: 6.8.1
     use_repository: "true"
