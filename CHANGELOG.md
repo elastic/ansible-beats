@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.4.1 - 2019/10/23
+
+* 7.4.1 as default version
+* 6.8.4 as 6.x tested version
+
+| PR                                                     | Author                             | Title               |
+| ------------------------------------------------------ | ---------------------------------- | ------------------- |
+|[#48](https://github.com/elastic/ansible-beats/pull/48) | [@jmlrt](https://github.com/jmlrt) | Fix probot newlines |
+
+
 ## 7.4.0 - 2019/10/01
 
 * 7.4.0 as default version
@@ -15,6 +25,7 @@
 |[#38](https://github.com/elastic/ansible-beats/pull/38) | [@jmlrt](https://github.com/jmlrt) | Add probot config to manage stale issues/pr + GH issue template |
 |[#40](https://github.com/elastic/ansible-beats/pull/40) | [@nyetwurk](https://github.com/nyetwurk) | Make beats `repo_key` variable a unique name less likely to collide |
 |[#41](https://github.com/elastic/ansible-beats/pull/41) | [@jmlrt](https://github.com/jmlrt) | Enhance ansible-beats documentation |
+
 
 ## 7.0.0 - 2019/05/09
 
