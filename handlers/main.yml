@@ -1,6 +1,9 @@
 ---
 # handlers file for beats
 
-- name: restart {{ beat }}
-  service: name={{ beat }} state=restarted enabled=yes
+- name: restart the service
+  service: 
+    name: "{{ beat }}" 
+    state: restarted 
+    enabled: true
   when: start_service and restart_on_change and not beats_started.changed

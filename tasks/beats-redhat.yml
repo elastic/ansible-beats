@@ -18,7 +18,7 @@
 - name: RedHat - Ensure {{beat}} is installed
   yum: name={{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %} state=present update_cache=yes
   when: use_repository
-  notify: restart {{beat}}
+  notify: restart the service
 
 - name: RedHat - lock {{beat}} version
   shell: yum versionlock add {{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %}
@@ -28,4 +28,4 @@
 - name: RedHat - Install {{beat}} from url
   yum: name={% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}-{{ beats_version }}-{{ansible_architecture}}.rpm{% endif %} state=present
   when: not use_repository
-  notify: restart {{beat}}
+  notify: restart the service

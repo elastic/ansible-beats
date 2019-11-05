@@ -4,7 +4,7 @@
   apt: name=apt-transport-https state=present cache_valid_time=86400
   when: use_repository
   register: beat_install
-  notify: restart {{beat}}
+  notify: restart the service
 
 - name: Debian - Ensure python-urllib3, python-openssl, python-pyasn1 & python-pip are installed
   apt:
@@ -35,7 +35,7 @@
 - name: Debian - Ensure {{beat}} is installed
   apt: name={{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %} state=present cache_valid_time=86400
   when: use_repository
-  notify: restart {{beat}}
+  notify: restart the service
 
 - name: Debian - hold {{beat}} version
   command: apt-mark hold {{beat}}
@@ -54,4 +54,4 @@
 - name: Debian - Ensure {{beat}} is installed from downloaded package
   apt: deb=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
   when: not use_repository
-  notify: restart {{beat}}
+  notify: restart the service
