@@ -39,7 +39,7 @@
   register: beat_install
   until: beat_install is succeeded
   when: use_repository
-  notify: restart {{ beat }}
+  notify: restart the service
 
 - name: RedHat - lock {{ beat }} version
   shell: >-
@@ -59,4 +59,4 @@
   register: beat_install
   until: beat_install is succeeded
   when: not use_repository
-  notify: restart {{ beat }}
+  notify: restart the service

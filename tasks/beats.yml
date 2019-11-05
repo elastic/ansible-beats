@@ -14,7 +14,7 @@
   include_tasks: beats-config.yml
 
 # Make sure the service is started, and restart if necessary
-- name: Start {{ beat }} service
+- name: Start {{ beat_product }} service
   service:
     name: '{{ beat }}'
     state: started
