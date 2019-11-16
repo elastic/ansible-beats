@@ -54,7 +54,8 @@
 - name: Debian - Download {{beat}} from url
   get_url:
     url: >-
-      {% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %}
+      {% if custom_package_url is defined %}{{ custom_package_url }}{%
+        else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %}
     dest: /tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
     validate_certs: false
   when: not use_repository

@@ -26,7 +26,7 @@
 
 - name: RedHat - lock {{beat}} version
   shell: >-
-    yum versionlock add 
+    yum versionlock add
     {{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %}
   when: version_lock
   changed_when: False
