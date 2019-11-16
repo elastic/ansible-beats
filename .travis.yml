@@ -1,0 +1,28 @@
+---
+dist: bionic
+sudo: required
+
+language: python
+python:
+  - "3.7"
+
+services:
+  - docker
+
+before_install:
+  - git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+
+install:
+  - pip3 install --upgrade ansible==2.8.* docker
+  - pip3 install molecule==2.22
+  - pip3 install git+https://github.com/ansible/ansible-lint.git
+  - ansible --version
+  - ansible-lint --version
+
+script:
+  - yamllint . -c .yamllint
+  - ansible-lint . -c .ansible-lint
+  - molecule test -s default
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
