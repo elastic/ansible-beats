@@ -1,66 +1,80 @@
 ---
 
 - name: Debian - Ensure apt-transport-https is installed
-  apt: name=apt-transport-https state=present cache_valid_time=86400
-  when: use_repository
+  apt:
+    name: apt-transport-https
+    state: present
+    cache_valid_time: 86400
+  when: use_repository | bool
   register: beat_install
-  notify: restart {{beat}}
+  notify: restart {{ beat }}
 
 - name: Debian - Ensure python-urllib3, python-openssl, python-pyasn1 & python-pip are installed
   apt:
-    name: python-urllib3,python-openssl,python-pyasn1,python-pip
+    name:
+      - python-urllib3
+      - python-openssl
+      - python-pyasn1
+      - python-pip
     state: present
-  when: use_repository and ansible_distribution_release == "trusty"
+  when:
+    - use_repository | bool
+    - ansible_distribution_release == "trusty"
 
 - name: Debian - ensure ndg-httpsclient pip is installed
   pip:
     name: ndg-httpsclient
     state: present
-  when: use_repository and ansible_distribution_release == "trusty"
+  when:
+    - use_repository | bool
+    - ansible_distribution_release == "trusty"
 
 - name: Debian - Add Beats repository key
   apt_key:
-    url: "{{ elastic_repo_key }}"
+    url: '{{ elastic_repo_key }}'
     state: present
-  when: use_repository
+  when: use_repository | bool
 
 - name: Debian - add beats repository
-  apt_repository: repo="deb {{ repo_url }} stable main" state=present
-  when: use_repository
+  apt_repository:
+    repo: 'deb {{ repo_url }} stable main'
+    state: present
+  when: use_repository | bool
 
-- name: Debian - unhold {{beat}} version for install
-  command: apt-mark unhold {{beat}}
+- name: Debian - unhold {{ beat }} version for install
+  command: apt-mark unhold {{ beat }}
   changed_when: false
 
-- name: Debian - Ensure {{beat}} is installed
+- name: Debian - Ensure {{ beat }} is installed
   apt:
     name: >-
-      {{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %}
+      {{ beat }}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %}
     state: present
     cache_valid_time: 86400
-  when: use_repository
-  notify: restart {{beat}}
+  when: use_repository | bool
+  notify: restart {{ beat }}
 
-- name: Debian - hold {{beat}} version
-  command: apt-mark hold {{beat}}
+- name: Debian - hold {{ beat }} version
+  command: apt-mark hold {{ beat }}
   when: version_lock
   changed_when: false
 
-- set_fact: os_arch="i386"
+- name: Set os_arch
+  set_fact:
+    os_arch: >-
+      {{ ansible_architecture == 'x86_64' | ternary("amd64", "i386") }}
 
-- set_fact: os_arch="amd64"
-  when: ansible_architecture == "x86_64"
-
-- name: Debian - Download {{beat}} from url
+- name: Debian - Download {{ beat }} from url
   get_url:
     url: >-
       {% if custom_package_url is defined %}{{ custom_package_url }}{%
-        else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %}
-    dest: /tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
+        else %}{{ beats_package_url }}/{{ beat }}/{{ beat }}_{{ beats_version }}_{{os_arch}}.deb{% endif %}
+    dest: '/tmp/{{ beat }}_{{ beats_version }}_{{os_arch}}.deb'
     validate_certs: false
-  when: not use_repository
+  when: not use_repository | bool
 
-- name: Debian - Ensure {{beat}} is installed from downloaded package
-  apt: deb=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
-  when: not use_repository
-  notify: restart {{beat}}
+- name: Debian - Ensure {{ beat }} is installed from downloaded package
+  apt:
+    deb: '/tmp/{{ beat }}_{{ beats_version }}_{{os_arch}}.deb'
+  when: not use_repository | bool
+  notify: restart {{ beat }}

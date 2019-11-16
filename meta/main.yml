@@ -1,12 +1,12 @@
 ---
-
-allow_duplicates: yes
-
+allow_duplicates: true
+dependencies: []
 galaxy_info:
   role_name: beats
   author: Dale McDiarmid
   description: Beats for Linux
   company: "Elastic.co"
+  issue_tracker_url: https://github.com/elastic/ansible-beats/issues
   license: "license (Apache)"
   min_ansible_version: 2.0
   platforms:
@@ -20,7 +20,7 @@ galaxy_info:
   - name: Ubuntu
     versions:
     - all
-  categories:
+  galaxy_tags:
     - beats
     - elastic
     - elk
