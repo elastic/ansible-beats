@@ -1,44 +1,46 @@
 ---
 #Install specific version here
-- name: wrapper playbook for kitchen testing "beats"
+- name: wrapper playbook for kitchen testing beats
   hosts: localhost
   roles:
-    - { role: "ansible-beats", beat: "packetbeat", version_lock: true,
-        beat_conf: {
-          "interfaces": {"device":"any"},
-          "protocols": {
-            "dns": {
-              "ports": [53],
-              "include_authorities":true
-            },
-            "http": {
-              "ports": [80, 8080, 8000, 5000, 8002]
-            },
-            "memcache": {
-              "ports": [11211]
-            },
-            "mysql": {
-              "ports": [3306]
-            },
-            "pgsql": {
-              "ports": [5432]
-            },
-            "redis": {
-              "ports": [6379]
-            },
-            "thrift": {
-              "ports": [9090]
-            },
-            "mongodb": {
-              "ports": [27017]
-            }
-          }
-        },
-        output_conf : {
-          "elasticsearch": {
-            "hosts": ["localhost:9200"]
-          }
-        }
-    }
+    - role: ansible-beats
+      beat: packetbeat
+      version_lock: true
+      beat_conf:
+        interfaces:
+          device: any
+        protocols:
+          dns:
+            ports:
+              - 53
+            include_authorities: true
+          http: 
+            ports:
+              - 80
+              - 8080
+              - 8000
+              - 5000
+              - 8002
+          memcache: 
+            ports:
+              - 11211
+          mysql: 
+            ports:
+             - 3306
+          pgsql: 
+            ports:
+             - 5432
+          redis: 
+            ports:
+             - 6379
+          thrift: 
+            ports:
+             - 9090
+          mongodb: 
+            ports:
+             - 27017
+      output_conf:
+        elasticsearch:
+          hosts: ["localhost:9200"]
   vars:
-    use_repository: "true"
+    use_repository: true

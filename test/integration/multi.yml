@@ -2,7 +2,28 @@
 - name: wrapper playbook for kitchen testing "beats"
   hosts: localhost
   roles:
-    - { role: "ansible-beats", beat: "filebeat", beat_conf: {"filebeat": {"inputs":[{"paths":["/var/log/*.log"],"type":"log"}]} } }
-    - { role: "ansible-beats", beat: "metricbeat", beat_conf: { "metricbeat.modules": [{"module": "system", "metricsets": ["cpu", "filesystem", "network", "process"], "enabled": true, "period": "10s", "processes":[".*"], "cpu_ticks": false } ] } }
+    - role: ansible-beats
+      beat: filebeat
+      beat_conf:
+        filebeat:
+          inputs:
+            - paths:
+                - /var/log/*.log
+              type: log
+    - role: ansible-beats
+      beat: metricbeat
+      beat_conf:
+        metricbeat:
+          modules:
+            - module: "system"
+              metricsets:
+                - cpu
+                - filesystem
+                - network
+                - process
+              enabled: true
+              period: 10s
+              processes: [".*"]
+              cpu_ticks: false
   vars:
-    use_repository: "true"
+    use_repository: true

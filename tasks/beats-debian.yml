@@ -30,17 +30,21 @@
 
 - name: Debian - unhold {{beat}} version for install
   command: apt-mark unhold {{beat}}
-  changed_when: False
+  changed_when: false
 
 - name: Debian - Ensure {{beat}} is installed
-  apt: name={{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %} state=present cache_valid_time=86400
+  apt:
+    name: >-
+      {{beat}}{% if beats_version is defined and beats_version != "" %}={{ beats_version }}{% endif %}
+    state: present
+    cache_valid_time: 86400
   when: use_repository
   notify: restart {{beat}}
 
 - name: Debian - hold {{beat}} version
   command: apt-mark hold {{beat}}
   when: version_lock
-  changed_when: False
+  changed_when: false
 
 - set_fact: os_arch="i386"
 
@@ -48,7 +52,11 @@
   when: ansible_architecture == "x86_64"
 
 - name: Debian - Download {{beat}} from url
-  get_url: url={% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %} dest=/tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb validate_certs=no
+  get_url:
+    url: >-
+      {% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}/{{beat}}_{{ beats_version }}_{{os_arch}}.deb{% endif %}
+    dest: /tmp/{{beat}}_{{ beats_version }}_{{os_arch}}.deb
+    validate_certs: false
   when: not use_repository
 
 - name: Debian - Ensure {{beat}} is installed from downloaded package
