@@ -22,7 +22,7 @@
 
 - name: Check pid_dir status
   stat:
-    path: '{{beats_pid_dir}}'
+    path: '{{ beats_pid_dir }}'
   register: pid_stat
 
 - name: Create PID Directory
@@ -53,7 +53,7 @@
 - name: Copy Configuration File for {{ beat }}
   template:
     src: beat.yml.j2
-    dest: '{{conf_file}}'
+    dest: '{{ conf_file }}'
     mode: 0644
     force: true
     owner: root
