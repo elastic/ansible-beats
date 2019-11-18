@@ -2,7 +2,15 @@
 - name: wrapper playbook for kitchen testing "beats"
   hosts: localhost
   roles:
-    - { role: "ansible-beats", beat: "filebeat", beat_conf: {"filebeat": {"prospectors":[{"paths":["/var/log/*.log"],"input_type":"log"}], "registry_file": "/var/lib/filebeat/registry"} } }
+    - role: ansible-beats
+      beat: filebeat
+      beat_conf:
+        filebeat:
+          prospectors:
+            - paths:
+                - /var/log/*.log
+              input_type: log
+          registry_file: /var/lib/filebeat/registry
   vars:
     beats_version: 6.8.4
     use_repository: "true"
