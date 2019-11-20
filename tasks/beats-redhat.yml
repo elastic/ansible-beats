@@ -1,31 +1,62 @@
 ---
-
 - name: Ensure libselinux-python on CentOS 6.x
-  yum: name=libselinux-python state=present update_cache=yes
-  when: ( ansible_distribution == "CentOS" ) and ( ansible_distribution_major_version == "6" )
+  yum:
+    name: libselinux-python
+    state: present
+    update_cache: true
+  register: libselinux_install
+  until: libselinux_install is succeeded
+  when:
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "6"
 
 - name: Redhat - add beats repository
-  template: src=beats.repo.j2 dest=/etc/yum.repos.d/beats.repo
+  template:
+    src: beats.repo.j2
+    dest: /etc/yum.repos.d/beats.repo
   when: use_repository
 
 - name: RedHat - install yum-version-lock
-  yum: name=yum-plugin-versionlock state=present update_cache=yes
+  yum:
+    name: yum-plugin-versionlock
+    state: present
+    update_cache: true
+  register: versionlock_install
+  until: versionlock_install is succeeded
 
-- name: RedHat - unlock {{beat}} for install
-  shell: yum versionlock delete {{beat}} || true
-  changed_when: False
+- name: RedHat - unlock {{ beat }} for install
+  shell: yum versionlock delete {{ beat }} || true
+  changed_when: false
+  tags:
+    - skip_ansible_lint
 
-- name: RedHat - Ensure {{beat}} is installed
-  yum: name={{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %} state=present update_cache=yes
+- name: RedHat - Ensure {{ beat }} is installed
+  yum:
+    name: >-
+      {{ beat }}{% if beats_version is defined and beats_version|length %}-{{ beats_version }}{% endif %}
+    state: present
+    update_cache: true
+  register: beat_install
+  until: beat_install is succeeded
   when: use_repository
-  notify: restart {{beat}}
+  notify: restart {{ beat }}
 
-- name: RedHat - lock {{beat}} version
-  shell: yum versionlock add {{beat}}{% if beats_version is defined and beats_version != "" %}-{{ beats_version }}{% endif %}
+- name: RedHat - lock {{ beat }} version
+  shell: >-
+    yum versionlock add
+    {{ beat }}{% if beats_version is defined and beats_version|length %}-{{ beats_version }}{% endif %}
   when: version_lock
-  changed_when: False
+  changed_when: false
+  tags:
+    - skip_ansible_lint
 
-- name: RedHat - Install {{beat}} from url
-  yum: name={% if custom_package_url is defined %}{{ custom_package_url }}{% else %}{{ beats_package_url }}/{{beat}}-{{ beats_version }}-{{ansible_architecture}}.rpm{% endif %} state=present
+- name: RedHat - Install {{ beat }} from url
+  yum:
+    name: >-
+      {% if custom_package_url is defined %}{{ custom_package_url }}{%
+        else %}{{ beats_package_url }}/{{ beat }}-{{ beats_version }}-{{ ansible_architecture }}.rpm{% endif %}
+    state: present
+  register: beat_install
+  until: beat_install is succeeded
   when: not use_repository
-  notify: restart {{beat}}
+  notify: restart {{ beat }}
