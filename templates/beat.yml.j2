@@ -1,7 +1,7 @@
 ################### {{beat}} Configuration #########################
 
 ############################# {{beat}} ######################################
-{{beat_conf | to_yaml}}
+{{beat_conf | to_nice_yaml(indent=2)}}
 
 ###############################################################################
 ############################# Libbeat Config ##################################
@@ -9,12 +9,12 @@
 
 ############################# Output ##########################################
 
-{{ beat_output_conf | to_yaml }}
+{{ beat_output_conf | to_nice_yaml(indent=2) }}
 
 {% if shipper_conf is defined %}############################# Shipper #########################################
 
-{{ beat_shipper_conf | to_yaml }}
+{{ beat_shipper_conf | to_nice_yaml(indent=2) }}
 {% endif %}
 ############################# Logging #########################################
 
-{{ beat_logging_conf | to_yaml }}
+{{ beat_logging_conf | to_nice_yaml(indent=2) }}
