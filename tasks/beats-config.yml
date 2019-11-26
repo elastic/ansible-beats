@@ -47,7 +47,7 @@
     force: true
     owner: root
     group: root
-  notify: restart {{ beat }}
+  notify: restart the service
 
 #Copy templated config file
 - name: Copy Configuration File for {{ beat }}
@@ -58,4 +58,4 @@
     force: true
     owner: root
     group: root
-  notify: restart {{ beat }}
+  notify: restart the service
