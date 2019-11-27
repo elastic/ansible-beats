@@ -1,5 +1,5 @@
 ---
-#Install specific version here
+# Install specific version here
 - name: wrapper playbook for kitchen testing beats
   hosts: localhost
   roles:
@@ -26,19 +26,19 @@
               - 11211
           mysql:
             ports:
-             - 3306
+              - 3306
           pgsql:
             ports:
-             - 5432
+              - 5432
           redis:
             ports:
-             - 6379
+              - 6379
           thrift:
             ports:
-             - 9090
+              - 9090
           mongodb:
             ports:
-             - 27017
+              - 27017
       output_conf:
         elasticsearch:
           hosts: ["localhost:9200"]
