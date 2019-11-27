@@ -1,7 +1,13 @@
+# {{ ansible_managed }}
+
 ################### {{beat}} Configuration #########################
 
+{% if bead_additional_conf is defined %}
+{{ bead_additional_conf | to_nice_yaml(indent=2) }}
+{% endif %}
+
 ############################# {{beat}} ######################################
-{{beat_conf | to_nice_yaml(indent=2)}}
+{{ beat_conf | to_nice_yaml(indent=2) }}
 
 ###############################################################################
 ############################# Libbeat Config ##################################
