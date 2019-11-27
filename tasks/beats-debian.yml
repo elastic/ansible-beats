@@ -8,7 +8,7 @@
   when: use_repository | bool
   register: beat_install
   until: beat_install is succeeded
-  notify: restart {{ beat }}
+  notify: restart the service
 
 - name: Debian - Ensure python-urllib3, python-openssl, python-pyasn1 & python-pip are installed
   apt:
@@ -63,7 +63,7 @@
   register: beat_install
   until: beat_install is succeeded
   when: use_repository | bool
-  notify: restart {{ beat }}
+  notify: restart the service
 
 - name: Debian - hold {{ beat }} version
   command: apt-mark hold {{ beat }}
@@ -88,4 +88,4 @@
   apt:
     deb: '/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb'
   when: not use_repository | bool
-  notify: restart {{ beat }}
+  notify: restart the service

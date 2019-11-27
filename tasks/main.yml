@@ -4,7 +4,13 @@
 - name: check-parameters
   include_tasks: beats-param-check.yml
 
+- set_fact:
+    beat_product: "{{ beat }}"
+
 - name: os-specific vars
   include_vars: '{{ ansible_os_family }}.yml'
 
 - include_tasks: beats.yml
+
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
