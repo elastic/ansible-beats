@@ -31,14 +31,14 @@
     state: directory
   when: pid_stat.stat.isdir is not defined or pid_stat.stat.islnk is not defined
 
-#fail if pid and config directories are not links or not directories i.e files
+# fail if pid and config directories are not links or not directories i.e files
 
 - name: Create Config Directory
   file:
     path: '{{ beats_conf_dir }}'
     state: directory
 
-#Copy the default file
+# Copy the default file
 - name: Copy Default File for Instance
   template:
     src: beat.j2
@@ -49,7 +49,7 @@
     group: root
   notify: restart the service
 
-#Copy templated config file
+# Copy templated config file
 - name: Copy Configuration File for {{ beat }}
   template:
     src: beat.yml.j2
