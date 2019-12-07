@@ -23,17 +23,6 @@
   loop_control:
     loop_var: beats_pack_tasks
 
-- name: 'Lock {{ beat }} version'
-  command: '{{ beats_lock_command }}'
-  args:
-    warn: false
-  register: versionlock_add
-  when: version_lock | bool
-  changed_when: >-
-    beat in versionlock_add.stdout
-  tags:
-    - molecule-idempotence-notest
-
 #Configuration file for beats
 - name: Beats configuration
   include_tasks: beats-config.yml
