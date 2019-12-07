@@ -1,9 +1,11 @@
 ---
 # handlers file for beats
 
-- name: restart the service
+- name: restart {{ beat }}
   service:
-    name: '{{ beat_product }}'
+    name: '{{ beat }}'
     state: restarted
-    enabled: true
-  when: start_service and restart_on_change and not beats_started.changed
+  when:
+    - start_service | bool
+    - restart_on_change | bool
+    - not beats_started.changed | bool
