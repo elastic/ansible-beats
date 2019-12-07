@@ -4,6 +4,20 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+    - name: Populate service facts
+      service_facts:
+
+    - name: Assert that filebeat service is running
+      assert:
+        that: |
+                "'running' in ansible_facts.services['filebeat.service'].state"
+                or
+                "'running' in ansible_facts.services['filebeat'].state"
+
+    - name: Check filebeat
+      command: filebeat version
+      register: filebeat_ver_cmd
+
+    - name: Debug filebeat ver
+      debug:
+        var: filebeat_ver_cmd
