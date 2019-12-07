@@ -32,7 +32,7 @@ platforms:
     region: us-east-1
     vpc_subnet_id: subnet-0f2b9cd66faea38af
     assign_public_ip: false
-    spot_price: 0.04
+    spot_price: 0.08
     security_group_name:
       - default
     wait_timeout: 1800
@@ -65,7 +65,7 @@ platforms:
     region: us-east-1
     vpc_subnet_id: subnet-0f2b9cd66faea38af
     assign_public_ip: false
-    spot_price: 0.04
+    spot_price: 0.08
     security_group_name:
       - default
     wait_timeout: 1800
