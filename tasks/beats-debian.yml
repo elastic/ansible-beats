@@ -50,18 +50,18 @@
   until: repo_install is succeeded
   when: use_repository | bool
 
-- name: Debian - showhold {{ beat }}
-  command: 'apt-mark showhold'
-  args:
-    warn: false
-  register: versionlock_list
-  changed_when: false
+# - name: Debian - showhold {{ beat }}
+#   command: 'apt-mark showhold'
+#   args:
+#     warn: false
+#   register: versionlock_list
+#   changed_when: false
 
-- name: Debian - unhold {{ beat }} version for install
-  command: 'apt-mark unhold {{ beat }}'
-  args:
-    warn: false
-  register: versionlock_del
-  when: beat in versionlock_list.stdout
-  changed_when: >-
-    ('Canceled hold on ' ~ beat) in versionlock_del.stdout
+# - name: Debian - unhold {{ beat }} version for install
+#   command: 'apt-mark unhold {{ beat }}'
+#   args:
+#     warn: false
+#   register: versionlock_del
+#   when: beat in versionlock_list.stdout
+#   changed_when: >-
+#     ('Canceled hold on ' ~ beat) in versionlock_del.stdout

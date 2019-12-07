@@ -13,7 +13,7 @@ platforms:
   - name: test-aws-centos8-ansible-beats
     image: ami-0ed2ad9dc845b42b6
     platform: centos8
-    instance_type: t3.micro
+    instance_type: t3.medium
     region: us-east-1
     vpc_subnet_id: subnet-0f2b9cd66faea38af
     assign_public_ip: false
@@ -24,6 +24,22 @@ platforms:
     ssh_user: centos
     groups:
       - rhel_family
+
+  - name: test-aws-rhel8-ansible-beats
+    image: ami-0ed2ad9dc845b42b6
+    platform: rhel8
+    instance_type: t3.medium
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: centos
+    groups:
+      - rhel_family
+      - oss
 
   - name: test-aws-centos7-ansible-beats
     image: ami-9887c6e7
@@ -41,6 +57,22 @@ platforms:
       - rhel_family
       - url
       - oss
+
+  - name: test-aws-rhel7-ansible-beats
+    image: ami-0ed2ad9dc845b42b6
+    platform: rhel7
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: centos
+    groups:
+      - rhel_family
+      - url
 
   - name: test-aws-centos6-ansible-beats
     image: ami-1585c46a

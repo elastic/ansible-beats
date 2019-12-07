@@ -28,29 +28,29 @@
     enabled: true
     state: present
 
-- name: RedHat - install yum-version-lock
-  yum:
-    name:
-      - yum-utils
-      - yum-plugin-versionlock
-    state: present
-    update_cache: true
-  register: versionlock_install
-  until: versionlock_install is succeeded
+# - name: RedHat - install yum-version-lock
+#   yum:
+#     name:
+#       - yum-utils
+#       - yum-plugin-versionlock
+#     state: present
+#     update_cache: true
+#   register: versionlock_install
+#   until: versionlock_install is succeeded
 
-- name: Read yum-lock list
-  slurp:
-    src: /etc/yum/pluginconf.d/versionlock.list
-  register: versionlock_list
+# - name: Read yum-lock list
+#   slurp:
+#     src: /etc/yum/pluginconf.d/versionlock.list
+#   register: versionlock_list
 
-- name: RedHat - unlock {{ beat }} for install
-  command: yum versionlock delete {{ beat }}
-  args:
-    warn: false
-  register: versionlock_delete
-  changed_when: >-
-    beat in versionlock_delete.stdout
-  when: >-
-    beat in (versionlock_list['content'] | b64decode)
-  tags:
-    - molecule-idempotence-notest
+# - name: RedHat - unlock {{ beat }} for install
+#   command: yum versionlock delete {{ beat }}
+#   args:
+#     warn: false
+#   register: versionlock_delete
+#   changed_when: >-
+#     beat in versionlock_delete.stdout
+#   when: >-
+#     beat in (versionlock_list['content'] | b64decode)
+#   tags:
+#     - molecule-idempotence-notest
