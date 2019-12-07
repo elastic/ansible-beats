@@ -1,37 +1,46 @@
 ---
 # Configure Beats Node
 
-- name: Set default facts
-  set_fact:
-    pid_file: '{{ beats_pid_dir }}/{{ beat }}.pid'
-    instance_default_file: '{{ default_file }}/{{ beat }}'
-    conf_file: '{{ beats_conf_dir }}/{{ beat }}.yml'
-    beat_output_conf:
-      output: '{{ output_conf }}'
+# - name: Set default facts
+#   set_fact:
+#     pid_file: '{{ beats_pid_dir }}/{{ beat }}.pid'
+#     instance_default_file: '{{ default_file }}/{{ beat }}'
+#     conf_file: '{{ beats_conf_dir }}/{{ beat }}.yml'
+#     beat_output_conf:
+#       output: '{{ output_conf }}'
 
-- name: Set beat_shipper_conf
-  set_fact:
-    beat_shipper_conf:
-      shipper: '{{ shipper_conf }}'
-  when: shipper_conf is defined
+# - name: Set beat_shipper_conf
+#   set_fact:
+#     beat_shipper_conf:
+#       shipper: '{{ shipper_conf }}'
+#   when: shipper_conf is defined
 
-- name: Set beat_logging_conf
-  set_fact:
-    beat_logging_conf:
-      logging: '{{ logging_conf }}'
+# - name: Set beat_logging_conf
+#   set_fact:
+#     beat_logging_conf:
+#       logging: '{{ logging_conf }}'
 
-- name: Check pid_dir status
-  stat:
-    path: '{{ beats_pid_dir }}'
-  register: pid_stat
+# - name: Check pid_dir status
+#   stat:
+#     path: '{{ beats_pid_dir }}'
+#   register: pid_stat
 
 - name: Create PID Directory
   file:
     path: '{{ beats_pid_dir }}'
     state: directory
-  when: pid_stat.stat.isdir is not defined or pid_stat.stat.islnk is not defined
+  # when: pid_stat.stat.isdir is not defined or pid_stat.stat.islnk is not defined
 
 #fail if pid and config directories are not links or not directories i.e files
+
+- name: Create {{ beat }} paths if defined
+  file:
+    path: '{{ beat_path_item.value }}'
+    state: directory
+  loop: >
+    {{ beat_conf[beat]['path'] | default({}) | dict2items }}
+  loop_control:
+    loop_var: beat_path_item
 
 - name: Create Config Directory
   file:
