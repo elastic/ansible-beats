@@ -8,7 +8,3 @@
   fail:
     msg: "beat_conf must be specified"
   when: beat_conf is not defined
-
-- name: Set beats_major_version
-  set_fact:
-    beats_major_version: '{{ beats_version[0] }}.x'

@@ -4,13 +4,44 @@
 - name: check-parameters
   include_tasks: beats-param-check.yml
 
-- set_fact:
-    beat_product: "{{ beat }}"
-
 - name: os-specific vars
   include_vars: '{{ ansible_os_family }}.yml'
 
-- include_tasks: beats.yml
+- name: Configure and install OS-specific packages
+  include_tasks: '{{ beats_platform_tasks }}'
+  with_first_found:
+    - '{{ beats_tasks }}'
+    - not-supported.yml
+  loop_control:
+    loop_var: beats_platform_tasks
 
-- name: Force all notified handlers to run at this point, not waiting for normal sync points
-  meta: flush_handlers
+- name: Install beats packages
+  include_tasks: '{{ beats_pack_tasks }}'
+  with_first_found:
+    - 'beats-{{ ansible_os_family | lower }}-{{ use_repository | string }}.yml'
+    - beats-package.yml
+  loop_control:
+    loop_var: beats_pack_tasks
+
+- name: 'Lock {{ beat }} version'
+  command: '{{ beats_lock_command }}'
+  args:
+    warn: false
+  register: versionlock_add
+  when: version_lock | bool
+  changed_when: >-
+    beat in versionlock_add.stdout
+  tags:
+    - molecule-idempotence-notest
+
+#Configuration file for beats
+- name: Beats configuration
+  include_tasks: beats-config.yml
+
+- name: 'Start {{ beat }} service'
+  service:
+    name: '{{ beat }}'
+    state: started
+    enabled: true
+  when: start_service
+  register: beats_started

@@ -1,0 +1,31 @@
+---
+extends: default
+
+rules:
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  colons:
+    max-spaces-after: -1
+    level: error
+  commas:
+    max-spaces-after: -1
+    level: error
+  empty-lines:
+    max: 3
+    level: error
+  hyphens:
+    level: error
+  truthy: disable
+  comments: disable
+  comments-indentation: disable
+  indentation: disable
+  key-duplicates: enable
+  line-length:
+    max: 150
+    level: warning
+  new-lines:
+    type: unix

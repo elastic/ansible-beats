@@ -1,0 +1,196 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: ec2
+lint:
+  name: yamllint
+  options:
+    config-file: .yamllint
+platforms:
+  - name: test-aws-centos8-ansible-beats
+    image: ami-0ed2ad9dc845b42b6
+    platform: centos8
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: centos
+    groups:
+      - rhel_family
+
+  - name: test-aws-centos7-ansible-beats
+    image: ami-9887c6e7
+    platform: centos7
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: centos
+    groups:
+      - rhel_family
+      - url
+      - oss
+
+  - name: test-aws-centos6-ansible-beats
+    image: ami-1585c46a
+    platform: centos6
+    instance_type: t2.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: centos
+    groups:
+      - rhel_family
+      - url
+
+  - name: test-aws-ubuntu16-ansible-beats
+    image: ami-09677e0a6b14905b0
+    platform: ubuntu16
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    security_group_name:
+      - default
+    spot_price: 0.04
+    wait_timeout: 1800
+    ssh_user: ubuntu
+    groups:
+      - debian_family
+
+  - name: test-aws-ubuntu18-ansible-beats
+    image: ami-012fd5eb46f56731f
+    platform: ubuntu18
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    security_group_name:
+      - default
+    spot_price: 0.04
+    wait_timeout: 1800
+    ssh_user: ubuntu
+    groups:
+      - debian_family
+      - oss
+
+  - name: test-aws-Debian9-ansible-beats
+    image: ami-003f19e0e687de1cd
+    platform: debian9
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: admin
+    groups:
+      - debian_family
+      - url
+
+  - name: test-aws-Amazon-ansible-beats
+    image: ami-035b3c7efe6d061d5
+    platform: amazon
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: ec2-user
+    groups:
+      - rhel_family
+
+  - name: test-aws-Amazon2-ansible-beats
+    image: ami-0b898040803850657
+    platform: amazon2
+    instance_type: t3.micro
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    spot_price: 0.04
+    security_group_name:
+      - default
+    wait_timeout: 1800
+    ssh_user: ec2-user
+    groups:
+      - rhel_family
+      - oss
+
+  # - name: test-aws-Windows2016-ansible-beats
+  #   image_id: ami-00a20f508263efd30
+  #   platform: windows2016core
+  #   region: us-east-1
+  #   instance_type: t3.micro
+  #   vpc_subnet_id: subnet-0f2b9cd66faea38af
+  #   assign_public_ip: false
+  #   spot_price: 0.14
+  #   security_group_name:
+  #     - default
+  #   wait_timeout: 1800
+  #   groups:
+  #     - windows
+
+  # - name: test-aws-Windows2019-ansible-beats
+  #   image_id: ami-0477b9335a5a75438
+  #   platform: windows2019core
+  #   region: us-east-1
+  #   instance_type: t3.micro
+  #   vpc_subnet_id: subnet-0f2b9cd66faea38af
+  #   assign_public_ip: false
+  #   spot_price: 0.14
+  #   security_group_name:
+  #     - default
+  #   wait_timeout: 1800
+  #   groups:
+  #     - windows
+provisioner:
+  name: ansible
+  log: true
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks,timer
+  inventory:
+    group_vars:
+      url:
+        use_repo: false
+        beats_version: 7.4.1
+      oss:
+        es_enable_xpack: false
+      windows:
+        ansible_connection: winrm
+        ansible_password: "{{ lookup('env', 'WINRM_ADMIN_PWD') | default('M0leCule123!', true) }}"
+        ansible_winrm_transport: credssp
+        ansible_winrm_server_cert_validation: ignore
+  playbooks:
+    create: ../resources/provisioning/AWS/create.yml
+    prepare: ../resources/provisioning/AWS/prepare.yml
+    destroy: ../resources/provisioning/AWS/destroy.yml
+    verify: ../resources/tests/verify.yml
+  lint:
+    name: ansible-lint
+scenario:
+  name: cloud-aws-direct
+verifier:
+  name: ansible
+  lint:
+    name: ansible-lint

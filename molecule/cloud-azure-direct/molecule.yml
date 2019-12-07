@@ -1,0 +1,62 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: azure
+lint:
+  name: yamllint
+  options:
+    config-file: .yamllint
+platforms:
+
+  - name: test-azure-Windows2016-ansible-beats
+    platform: windows2016core
+    assign_public_ip: false
+    vm_size: Standard_D2s_v3
+    az_location: northeurope
+    az_resource_group_name: epm-ldi
+    az_virtual_network_name: epm-ldi-northeurope-vnet
+    az_subnet_name: epm-ldi-northeurope-subnet
+    az_network_security_group: epm-ldi-northeurope-sg
+    groups:
+      - windows
+
+  - name: test-azure-Windows2019-ansible-beats
+    platform: windows2019core
+    assign_public_ip: true
+    vm_size: Standard_D2s_v3
+    az_location: northeurope
+    az_resource_group_name: epm-ldi
+    az_virtual_network_name: epm-ldi-northeurope-vnet
+    az_subnet_name: epm-ldi-northeurope-subnet
+    az_network_security_group: epm-ldi-northeurope-sg
+    groups:
+      - windows
+provisioner:
+  name: ansible
+  log: true
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks,timer
+  inventory:
+    group_vars:
+      windows:
+        ansible_connection: winrm
+        ansible_password: "{{ lookup('env', 'WINRM_ADMIN_PWD') | default('M0leCule123!', true) }}"
+        ansible_winrm_transport: credssp
+        ansible_winrm_server_cert_validation: ignore
+  playbooks:
+    create: ../resources/provisioning/AZURE/create.yml
+    prepare: ../resources/provisioning/AZURE/prepare.yml
+    destroy: ../resources/provisioning/AZURE/destroy.yml
+    verify: ../resources/tests/verify.yml
+  lint:
+    name: ansible-lint
+scenario:
+  name: cloud-azure-direct
+verifier:
+  name: ansible
+  lint:
+    name: ansible-lint

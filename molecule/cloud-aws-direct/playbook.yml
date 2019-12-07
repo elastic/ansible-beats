@@ -1,0 +1,30 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  roles:
+    - role: ansible-beats
+      beat: filebeat
+      beat_conf:
+        filebeat:
+          inputs:
+            - paths:
+                - /var/log/*.log
+              type: log
+    - role: ansible-beats
+      beat: metricbeat
+      beat_conf:
+        metricbeat:
+          modules:
+            - module: system
+              metricsets:
+                - cpu
+                - filesystem
+                - network
+                - process
+              enabled: true
+              period: 10s
+              processes: [".*"]
+              cpu_ticks: false
+  vars:
+    version_lock: false

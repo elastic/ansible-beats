@@ -1,0 +1,7 @@
+---
+- name: 'Ensure {{ beat }} is installed'
+  apt:
+    deb: '{{ beats_name_package }}'
+  register: beat_install
+  until: beat_install is succeeded
+  notify: restart {{ beat }}

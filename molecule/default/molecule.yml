@@ -1,0 +1,47 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+  options:
+    config-file: .yamllint
+platforms:
+  - name: test-docker-centos7-ansible-beats
+    image: leandelivery/docker-systemd:centos7
+    privileged: true
+    groups:
+      - rhel_family
+  - name: test-docker-ubuntu1804-ansible-beats
+    image: leandelivery/docker-systemd:ubuntu-18.04
+    privileged: true
+    security_opts:
+      - seccomp=unconfined
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /tmp
+      - /run
+    capabilities:
+      - SYS_ADMIN
+    groups:
+      - debian_family
+provisioner:
+  name: ansible
+  log: true
+  lint:
+    name: ansible-lint
+  config_options:
+    defaults:
+      callback_whitelist: profile_tasks,timer
+  playbooks:
+    verify: ../resources/tests/verify.yml
+scenario:
+  name: default
+verifier:
+  name: ansible
+  lint:
+    name: ansible-lint

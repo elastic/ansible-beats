@@ -1,5 +1,21 @@
 ---
 # vars file for beats
-
-beats_package_url: "https://download.elastic.co/beats"
-elastic_repo_key: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+beats_package_url: https://download.elastic.co/beats
+elastic_repo_key: https://packages.elastic.co/GPG-KEY-elasticsearch
+beats_major_version: >-
+  {{ (beats_version | default('7')).split('.') | first }}.x
+beats_tasks: >-
+  {{ use_repository
+    | ternary('beats-' ~ (ansible_os_family | lower) ~ '.yml',
+              'beats-url.yml') }}
+os_arch: >-
+  {{ ansible_architecture == 'x86_64' | ternary('amd64', 'i386') }}
+beats_dl_version: >-
+  {{ es_enable_xpack | ternary(beats_version|default(''), 'oss-' ~ beats_version|default('')) }}
+beats_repo_version: >-
+  {{ es_enable_xpack | ternary(beats_major_version, 'oss-' ~ beats_major_version) }}
+beats_download_url: >-
+  {{ custom_package_url | default(beats_package_url ~ '/' ~ beat '/' ~ beats_base_package) }}
+beats_url_package: '{{ beats_download_path }}/{{ beats_base_package }}'
+beats_name_package: >-
+  {{ (use_repository | bool) | ternary(beats_repo_package, beats_url_package) }}

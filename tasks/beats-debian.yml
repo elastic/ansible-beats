@@ -8,7 +8,7 @@
   when: use_repository | bool
   register: beat_install
   until: beat_install is succeeded
-  notify: restart the service
+  notify: restart {{ beat }}
 
 - name: Debian - Ensure python-urllib3, python-openssl, python-pyasn1 & python-pip are installed
   apt:
@@ -36,7 +36,7 @@
 
 - name: Debian - Add Beats repository key
   apt_key:
-    url: '{{ elastic_repo_key }}'
+    url: '{{ elastic_gpg_key }}'
     state: present
   register: apt_key_install
   until: apt_key_install is succeeded
@@ -50,42 +50,18 @@
   until: repo_install is succeeded
   when: use_repository | bool
 
+- name: Debian - showhold {{ beat }}
+  command: 'apt-mark showhold'
+  args:
+    warn: false
+  register: versionlock_list
+  changed_when: false
+
 - name: Debian - unhold {{ beat }} version for install
-  command: apt-mark unhold {{ beat }}
-  changed_when: false
-
-- name: Debian - Ensure {{ beat }} is installed
-  apt:
-    name: >-
-      {{ beat }}{% if beats_version is defined and beats_version|length>0 %}={{ beats_version }}{% endif %}
-    state: present
-    cache_valid_time: 86400
-  register: beat_install
-  until: beat_install is succeeded
-  when: use_repository | bool
-  notify: restart the service
-
-- name: Debian - hold {{ beat }} version
-  command: apt-mark hold {{ beat }}
-  when: version_lock
-  changed_when: false
-
-- name: Set os_arch
-  set_fact:
-    os_arch: >-
-      {{ ansible_architecture == 'x86_64' | ternary('amd64', 'i386') }}
-
-- name: Debian - Download {{ beat }} from url
-  get_url:
-    url: >-
-      {% if custom_package_url is defined %}{{ custom_package_url }}{%
-        else %}{{ beats_package_url }}/{{ beat }}/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb{% endif %}
-    dest: '/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb'
-    validate_certs: false
-  when: not use_repository | bool
-
-- name: Debian - Ensure {{ beat }} is installed from downloaded package
-  apt:
-    deb: '/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb'
-  when: not use_repository | bool
-  notify: restart the service
+  command: 'apt-mark unhold {{ beat }}'
+  args:
+    warn: false
+  register: versionlock_del
+  when: beat in versionlock_list.stdout
+  changed_when: >-
+    ('Canceled hold on ' ~ beat) in versionlock_del.stdout

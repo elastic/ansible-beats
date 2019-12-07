@@ -1,4 +1,10 @@
 ---
-default_file: "/etc/default"
-init_script: "/etc/init.d"
-repo_url: "https://artifacts.elastic.co/packages/{{ beats_major_version }}/apt"
+default_file: /etc/default
+init_script: /etc/init.d
+beats_default_download_path: /tmp
+repo_url: 'https://artifacts.elastic.co/packages/{{ beats_repo_version }}/apt'
+beats_base_package: >-
+  {{ beat }}_{{ beats_dl_version }}_{{ os_arch }}.deb
+beats_repo_package: >-
+  {{ (beats_version|default(false)) | ternary(beat ~ '=' ~ beats_version|default(false),beat) }}
+beats_lock_command: 'apt-mark hold {{ beat }}'

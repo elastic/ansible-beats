@@ -1,0 +1,5 @@
+---
+- name: Warn on unsupported platform
+  fail:
+    msg: |
+      This role does not support '{{ ansible_os_family }}' platform
