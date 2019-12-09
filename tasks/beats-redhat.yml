@@ -1,14 +1,14 @@
 ---
-- name: Ensure libselinux-python on CentOS 6.x
-  yum:
-    name: libselinux-python
-    state: present
-    update_cache: true
-  register: libselinux_install
-  until: libselinux_install is succeeded
-  when:
-    - ansible_distribution == "CentOS"
-    - ansible_distribution_major_version == "6"
+# - name: Ensure libselinux-python on CentOS 6.x
+#   yum:
+#     name: libselinux-python
+#     state: present
+#     update_cache: true
+#   register: libselinux_install
+#   until: libselinux_install is succeeded
+#   when:
+#     - ansible_distribution == "CentOS"
+#     - ansible_distribution_major_version == "6"
 
 - name: Importing elastic GPG Key
   rpm_key:
