@@ -13,15 +13,23 @@
     loop_var: beat_path_item
 
 #Copy the default file
-- name: Copy Default File for Instance
-  template:
-    src: beat.j2
-    dest: '{{ instance_default_file }}'
-    mode: 0644
-    force: true
-    owner: root
-    group: root
-  notify: restart {{ beat }}
+# - name: Copy Default File for Instance
+#   template:
+#     src: beat.j2
+#     dest: '{{ instance_default_file }}'
+#     mode: 0644
+#     force: true
+#     owner: root
+#     group: root
+#   notify: restart {{ beat }}
+
+# - name: Copy service configuration file
+#   template:
+#     src: '{{ beat_service_script }}.j2'
+#     dest: '{{ fb_service_path }}/{{ fb_service_script }}'
+#     mode: '{{ fb_service_script_mode }}'
+#     force: true
+#   notify: '{{ fb_service_handlers }}'
 
 #Copy templated config file
 - name: Copy Configuration File for {{ beat }}
