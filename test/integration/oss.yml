@@ -1,0 +1,15 @@
+---
+- name: wrapper playbook for kitchen testing "beats"
+  hosts: localhost
+  roles:
+    - role: ansible-beats
+      beat: filebeat
+      beat_conf:
+        filebeat:
+          inputs:
+            - paths:
+                - /var/log/*.log
+              type: log
+  vars:
+    use_repository: true
+    oss_version: true
