@@ -204,7 +204,7 @@ provisioner:
   inventory:
     group_vars:
       url:
-        use_repo: false
+        beats_use_repository: false
         beats_version: 7.4.1
       oss:
         es_enable_xpack: false
