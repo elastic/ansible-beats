@@ -32,5 +32,5 @@
     name: '{{ beat }}'
     state: started
     enabled: true
-  when: beats_start_service
+  when: beats_start_service | bool
   register: beats_started
