@@ -27,4 +27,4 @@
               processes: [".*"]
               cpu_ticks: false
   vars:
-    use_repository: true
+    beats_use_repository: true

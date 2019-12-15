@@ -154,7 +154,7 @@ The following illustrates applying configuration parameters to Packetbeat instan
         }
     }
   vars:
-    use_repository: "true"
+    beats_use_repository: "true"
 ```
 
 ### Additional Configuration
@@ -163,12 +163,10 @@ Supported variables are as follows:
 
 - **beat** (*MANDATORY*): Beat product. Supported values are: "filebeat", "metricbeat" & "packetbeat" (others beats from [The Beats Family](https://www.elastic.co/products/beats) should work in most cases but aren't currently tested).
 - **beat_conf** (*MANDATORY*): Beat Configuration. Should be defined as a map.
-- **beats_version** (*Defaults to `7.5.0`*): Beats version.
-- **version_lock** (*Defaults to `false`*): Locks the installed version if set to true, thus preventing other processes from updating. This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required).
-- **use_repository** (*Defaults to `true`*): Use elastic repo for yum or apt if true. If false, a custom custom_package_url must be provided.
-- **start_service** (*Defaults to `true`*): service will be started if true, false otherwise.
-- **restart_on_change** (*Defaults to `true`*): Changes to configuration or installed versions, will result in a restart if true.
-- **daemon_args** (*Applicable to version 1.x of beats*): Allows run time params to be passed to beats.
+- **beats_version**: Beats version. If not defined, the latest version of package is installed.
+- **beats_use_repository** (*Defaults to `true`*): Use elastic repo for yum or apt if true. If false, a custom custom_package_url must be provided.
+- **beats_start_service** (*Defaults to `true`*): service will be started if true, false otherwise.
+- **beats_restart_on_change** (*Defaults to `true`*): Changes to configuration or installed versions, will result in a restart if true.
 - **logging_conf** (*Defaults to `{"files":{"rotateeverybytes":10485760}}`*): Logging configuration. Should be defined as a map. Map is serialized into logging section of beat config.
 - **shipper_conf** (*Applicable to version 1.x of beats*): Shipper configuration. Should be defined as a map . Map is serialized into shipper section of beat config.
 - **output_conf** (*Defaults to `{"elasticsearch":{"hosts":["localhost:9200"]}}`*): Output configuration. Map is serialized into output section of beat config.

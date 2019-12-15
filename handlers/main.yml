@@ -6,6 +6,6 @@
     name: '{{ beat }}'
     state: restarted
   when:
-    - start_service | bool
-    - restart_on_change | bool
+    - beats_start_service | bool
+    - beats_restart_on_change | bool
     - not beats_started.changed | bool

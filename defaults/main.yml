@@ -1,11 +1,9 @@
 ---
 # defaults file for beats
 es_enable_xpack: true
-version_lock: false
-use_repository: true
-start_service: true
-restart_on_change: true
-daemon_args: ''
+beats_use_repository: true
+beats_start_service: true
+beats_restart_on_change: true
 logging_conf:
   files:
     rotateeverybytes: 10485760

@@ -15,7 +15,7 @@ beat_logging_conf:
   logging: '{{ logging_conf }}'
 
 beats_tasks: >-
-  {{ use_repository
+  {{ beats_use_repository
     | ternary('beats-' ~ (ansible_os_family | lower) ~ '.yml',
               'beats-url.yml') }}
 os_arch: >-
@@ -28,4 +28,4 @@ beats_download_url: >-
   {{ custom_package_url | default(beats_package_url ~ '/' ~ beat '/' ~ beats_base_package) }}
 beats_url_package: '{{ beats_download_path }}/{{ beats_base_package }}'
 beats_name_package: >-
-  {{ (use_repository | bool) | ternary(beats_repo_package, beats_url_package) }}
+  {{ (beats_use_repository | bool) | ternary(beats_repo_package, beats_url_package) }}

@@ -13,4 +13,4 @@
           registry_file: /var/lib/filebeat/registry
   vars:
     beats_version: 6.8.5
-    use_repository: "true"
+    beats_use_repository: "true"
