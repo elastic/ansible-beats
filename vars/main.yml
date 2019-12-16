@@ -25,7 +25,7 @@ beats_dl_version: >-
 beats_repo_version: >-
   {{ es_enable_xpack | ternary(beats_major_version, 'oss-' ~ beats_major_version) }}
 beats_download_url: >-
-  {{ custom_package_url | default(beats_package_url ~ '/' ~ beat '/' ~ beats_base_package) }}
+  {{ custom_package_url | default(beats_package_url ~ '/' ~ beat ~ '/' ~ beats_base_package) }}
 beats_url_package: '{{ beats_download_path }}/{{ beats_base_package }}'
 beats_name_package: >-
   {{ (beats_use_repository | bool) | ternary(beats_repo_package, beats_url_package) }}
