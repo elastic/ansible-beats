@@ -20,6 +20,10 @@
   debug:
     var: beats_base_package
 
+- name: debug beats_download_url
+  debug:
+    var: beats_download_url
+
 - name: Download {{ beat }} from url
   get_url:
     url: '{{ beats_download_url }}'
