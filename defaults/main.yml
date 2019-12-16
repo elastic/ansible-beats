@@ -12,6 +12,4 @@ output_conf:
     hosts: '[localhost:9200]'
 beats_pid_dir: /var/run
 beats_conf_dir: '/etc/{{ beat }}'
-beats_download_path: '{{ beats_default_download_path }}'
 beats_yum_repo_file: /etc/yum.repos.d/beats.repo
-elastic_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch

@@ -3,11 +3,3 @@
   fail:
     msg: "beats_version must be valid semantic format e.g. '7.4.1'"
   when: beats_version is not defined or (beats_version | length == 0)
-
-# - name: Download {{ beat }} from url
-#   get_url:
-#     url: '{{ beats_download_url }}'
-#     dest: '{{ beats_download_path }}'
-#     validate_certs: false
-#   register: beat_download
-#   until: beat_download is succeeded
