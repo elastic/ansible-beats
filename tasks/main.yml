@@ -22,7 +22,7 @@
 - name: Install beats packages
   include_tasks: '{{ beats_pack_tasks }}'
   with_first_found:
-    - 'beats-{{ ansible_os_family | lower }}-{{ beats_use_repository | string }}.yml'
+    - 'beats-{{ ansible_os_family | lower }}-{{ beats_use_repository | string | lower }}.yml'
     - beats-package.yml
   loop_control:
     loop_var: beats_pack_tasks
