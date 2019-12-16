@@ -1,6 +1,6 @@
 ---
 # vars file for beats
-beats_package_url: https://download.elastic.co/beats
+beats_package_url: https://artifacts.elastic.co/downloads/beats
 elastic_repo_key: https://packages.elastic.co/GPG-KEY-elasticsearch
 beats_major_version: >-
   {{ (beats_version | default('7')).split('.') | first }}.x
