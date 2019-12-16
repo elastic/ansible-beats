@@ -19,7 +19,7 @@ beats_tasks: >-
     | ternary('beats-' ~ (ansible_os_family | lower) ~ '.yml',
               'beats-url.yml') }}
 os_arch: >-
-  {{ ansible_architecture == 'x86_64' | ternary('amd64', 'i386') }}
+  {{ (ansible_architecture == 'x86_64') | ternary('amd64', 'i386') }}
 beats_dl_version: >-
   {{ es_enable_xpack | ternary(beats_version|default(''), 'oss-' ~ beats_version|default('')) }}
 beats_repo_version: >-
