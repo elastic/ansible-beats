@@ -4,6 +4,22 @@
     msg: "beats_version must be valid semantic format e.g. '7.4.1'"
   when: beats_version is not defined or (beats_version | length == 0)
 
+- name: debug beats_version
+  debug:
+    var: beats_version
+
+- name: debug beats_dl_version
+  debug:
+    var: beats_dl_version
+
+- name: debug beats_package_url
+  debug:
+    var: beats_package_url
+
+- name: debug beats_base_package
+  debug:
+    var: beats_base_package
+
 - name: Download {{ beat }} from url
   get_url:
     url: '{{ beats_download_url }}'
