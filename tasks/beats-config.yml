@@ -8,7 +8,7 @@
   loop: >
     {{ beat_conf[beat]['path'] | default({})
       | dict2items | map(attribute='value') | list
-      | union([beats_pid_dir, beats_conf_dir]) | unique }}
+      | union([beats_conf_dir]) | unique }}
   loop_control:
     loop_var: beat_path_item
 

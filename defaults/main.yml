@@ -1,6 +1,6 @@
 ---
 # defaults file for beats
-es_enable_xpack: true
+beats_oss_version: '{{ not (es_enable_xpack|default(true)) }}'
 beats_use_repository: true
 beats_start_service: true
 beats_restart_on_change: true
@@ -10,6 +10,4 @@ logging_conf:
 output_conf:
   elasticsearch:
     hosts: '[localhost:9200]'
-beats_pid_dir: /var/run
 beats_conf_dir: '/etc/{{ beat }}'
-beats_yum_repo_file: /etc/yum.repos.d/beats.repo

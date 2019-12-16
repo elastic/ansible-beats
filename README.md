@@ -164,14 +164,14 @@ Supported variables are as follows:
 - `beat` (*MANDATORY*): Beat product. Supported values are: "filebeat", "metricbeat" & "packetbeat" (others beats from [The Beats Family](https://www.elastic.co/products/beats) should work in most cases but aren't currently tested).
 - `beat_conf` (*MANDATORY*): Beat Configuration. Should be defined as a map.
 - `beats_version`: Beats version. If not defined, the latest version of package is installed.
-- `beats_use_repository` (*Defaults to `true`*): Use elastic repo for yum or apt if true. If false, package will be installed from elastic download url. A custom `beats_custom_package_url` can be provided as alternative.
+- `beats_use_repository` (*Defaults to `true`*): Use elastic repo for yum or apt if true. If false, package will be installed from elastic download url (`beats_version` must be defined to perform this).  A custom `beats_custom_package_url` can be provided as an alternative.
+- `beats_oss_version` (*Defaults to `false`*): If true, OSS distribution will be installed.  Additionally, if optional variable `es_enable_xpack` is defined the value of `beats_oss_version` is set to the opposite boolean value (e.g. if `es_enable_xpack` is set to `false`, `beats_oss_version` becomes `true`).
 - `beats_custom_package_url` (*Defaults - `Undefined`*): Custom url to install beat package from.
 - `beats_start_service` (*Defaults to `true`*): service will be started if true, false otherwise.
 - `beats_restart_on_change` (*Defaults to `true`*): Changes to configuration or installed versions, will result in a restart if true.
 - `logging_conf` (*Defaults to `{"files":{"rotateeverybytes":10485760}}`*): Logging configuration. Should be defined as a map. Map is serialized into logging section of beat config.
 - `shipper_conf` (*Applicable to version 1.x of beats*): Shipper configuration. Should be defined as a map . Map is serialized into shipper section of beat config.
 - `output_conf` (*Defaults to `{"elasticsearch":{"hosts":["localhost:9200"]}}`*): Output configuration. Map is serialized into output section of beat config.
-- `beats_pid_dir` (*Defaults to `/var/run`*): Location of beats pid file.
 - `beats_conf_dir` (*Defaults to `/etc/{beat}`*): Location of conf directory for beats configuration file.
 
 ## License
