@@ -1,6 +1,5 @@
 ---
 # Configure Beats Node
-
 - name: Create {{ beat }} paths if defined
   file:
     path: '{{ beat_path_item }}'

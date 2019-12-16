@@ -1,5 +1,4 @@
 ---
-
 - name: Debian - Ensure apt-transport-https is installed
   apt:
     name: apt-transport-https
