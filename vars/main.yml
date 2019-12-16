@@ -21,7 +21,7 @@ beats_tasks: >-
 os_arch: >-
   {{ (ansible_architecture == 'x86_64') | ternary('amd64', 'i386') }}
 beats_dl_version: >-
-  {{ beats_oss_version|bool | ternary('oss-' ~ beats_version|default('')), beats_version|default('')}}
+  {{ beats_oss_version|bool | ternary('oss-' ~ beats_version|default(''), beats_version|default(''))}}
 beats_repo_version: >-
   {{ beats_oss_version|bool | ternary('oss-' ~ beats_major_version, beats_major_version) }}
 beats_download_url: >-
