@@ -15,10 +15,6 @@
   loop_control:
     loop_var: beats_platform_tasks
 
-- name: debug tasks
-  debug:
-    msg: 'beats-{{ ansible_os_family | lower }}-{{ beats_use_repository | string }}.yml'
-
 - name: Install beats packages
   include_tasks: '{{ beats_pack_tasks }}'
   with_first_found:
