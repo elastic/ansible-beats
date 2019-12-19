@@ -30,7 +30,7 @@ This role provides a generic means of installing Elastic supported Beats
 Create your Ansible playbook with your own tasks, and include the role beats. You will have to have this repository accessible within the context of playbook.
 
 ```sh
-ansible-galaxy install elastic.beats,7.5.0
+ansible-galaxy install elastic.beats,7.5.1
 ```
 
 Then create your playbook yaml adding the role beats.
@@ -43,7 +43,7 @@ The simplest configuration therefore consists of:
   roles:
     - role: elastic.beats
   vars:
-    beats_version: 7.5.0
+    beats_version: 7.5.1
     beat: filebeat
     beat_conf:
       inputs:
@@ -53,11 +53,11 @@ The simplest configuration therefore consists of:
             - /var/log/*.log
 ```
 
-The above installs Filebeat 7.5.0 on the hosts 'localhost'.
+The above installs Filebeat 7.5.1 on the hosts 'localhost'.
 
 **Notes**:
 - Beats default version is described in [`beats_version`](defaults/main.yml#L4). You can override this variable in your playbook to install another version.
-While we are testing this role only with one 7.x and one 6.x version (respectively [7.5.0](defaults/main.yml#L4) and [6.8.5](test/integration/standard-6x.yml#L7) at the time of writing), this role should work with others version also in most cases.
+While we are testing this role only with one 7.x and one 6.x version (respectively [7.5.1](defaults/main.yml#L4) and [6.8.6](test/integration/standard-6x.yml#L7) at the time of writing), this role should work with others version also in most cases.
 - Beat product is described in `beat` variable. While currently tested Beats are Filebeat, Metricbeat & Packetbeat, this role should work also with other member of [The Beats Family](https://www.elastic.co/products/beats) in most cases.
 
 ## Testing

@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.5.1 - 2019/12/18
+
+* 7.5.1 as default version
+* 6.8.6 as 6.x tested version
+
+| PR                                                     | Author                                             | Title                    |
+| ------------------------------------------------------ | -------------------------------------------------- | ------------------------ |
+|[#61](https://github.com/elastic/ansible-beats/pull/61) | [@robsonpeixoto](https://github.com/robsonpeixoto) | Allow use oss repository |
+
+
 ## 7.5.0 - 2019/12/02
 
 * 7.5.0 as default version
