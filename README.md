@@ -56,8 +56,8 @@ The simplest configuration therefore consists of:
 The above installs Filebeat 7.5.1 on the hosts 'localhost'.
 
 **Notes**:
-- Beats default version is described in [`beats_version`](defaults/main.yml#L4). You can override this variable in your playbook to install another version.
-While we are testing this role only with one 7.x and one 6.x version (respectively [7.5.1](defaults/main.yml#L4) and [6.8.6](test/integration/standard-6x.yml#L7) at the time of writing), this role should work with others version also in most cases.
+- Beats default version is described in [`beats_version`](https://github.com/elastic/ansible-beats/blob/master/defaults/main.yml#L4). You can override this variable in your playbook to install another version.
+While we are testing this role only with one 7.x and one 6.x version (respectively [7.5.1](https://github.com/elastic/ansible-beats/blob/master/defaults/main.yml#L4) and [6.8.6](https://github.com/elastic/ansible-beats/blob/master/test/integration/standard-6x.yml#L7) at the time of writing), this role should work with others version also in most cases.
 - Beat product is described in `beat` variable. While currently tested Beats are Filebeat, Metricbeat & Packetbeat, this role should work also with other member of [The Beats Family](https://www.elastic.co/products/beats) in most cases.
 
 ## Testing
