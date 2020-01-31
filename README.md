@@ -46,11 +46,12 @@ The simplest configuration therefore consists of:
     beats_version: 7.5.2
     beat: filebeat
     beat_conf:
-      inputs:
-        - type: log
-          enabled: true
-          paths:
-            - /var/log/*.log
+      filebeat:
+        inputs:
+          - type: log
+            enabled: true
+            paths:
+              - /var/log/*.log
 ```
 
 The above installs Filebeat 7.5.2 on the hosts 'localhost'.
