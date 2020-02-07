@@ -106,7 +106,7 @@ $ make destroy-all
 
 ### Basic Beats configuration
 
-All Betas configuration parameters are supported.  This is achieved using a configuration map parameter `beat_conf` which is serialized into the `${beat}.yml` file.
+All Beats configuration parameters are supported.  This is achieved using a configuration map parameter `beat_conf` which is serialized into the `${beat}.yml` file.
 The use of a map ensures the Ansible playbook does not need to be updated to reflect new/deprecated/plugin configuration parameters.
 
 In addition to the `beat_conf` map, several other parameters are supported for additional functions e.g. script installation.  These can be found in the role's `defaults/main.yml` file.
