@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.6.0 - 2020/02/11
+
+* 7.6.0 as default version
+
+| PR                                                     | Author                                                 | Title                                                    |
+| ------------------------------------------------------ | ------------------------------------------------------ | -------------------------------------------------------- |
+|[#69](https://github.com/elastic/ansible-beats/pull/69) | [@dependabot[bot]](https://github.com/apps/dependabot) | Bump rubyzip from 1.2.2 to 2.0.0                         |
+|[#71](https://github.com/elastic/ansible-beats/pull/71) | [@jmlrt](https://github.com/jmlrt)                     | Fix filebeat example configuration                       |
+|[#72](https://github.com/elastic/ansible-beats/pull/72) | [@beand](https://github.com/beand)                     | Fixed typo                                               |
+
+
 ## 7.5.2 - 2020/01/21
 
 * 7.5.2 as default version
@@ -8,7 +19,6 @@
 | ------------------------------------------------------ | ---------------------------------- | -------------------------------------------- |
 |[#66](https://github.com/elastic/ansible-beats/pull/66) | [@jmlrt](https://github.com/jmlrt) | [doc] switched relative URLs to absolute URLs|
 |[#67](https://github.com/elastic/ansible-beats/pull/67) | [@jmlrt](https://github.com/jmlrt) | [ci] bump ruby to 2.5.7                      |
-
 
 
 ## 7.5.1 - 2019/12/18
