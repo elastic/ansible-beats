@@ -44,7 +44,7 @@
     state: present
   register: apt_key_install
   until: apt_key_install is succeeded
-  when: use_repository | bool
+  when: beats_add_repository | bool
 
 - name: Debian - add beats repository
   become: yes
@@ -53,7 +53,7 @@
     state: present
   register: repo_install
   until: repo_install is succeeded
-  when: use_repository | bool
+  when: beats_add_repository | bool
 
 - name: Debian - unhold {{ beat }} version for install
   become: yes

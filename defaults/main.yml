@@ -4,6 +4,7 @@ beats_version: 7.6.1
 oss_version: false
 version_lock: false
 use_repository: true
+beats_add_repository: "{{ use_repository }}"
 start_service: true
 restart_on_change: true
 daemon_args: ""
