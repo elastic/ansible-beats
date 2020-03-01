@@ -176,6 +176,30 @@ Supported variables are as follows:
 - **output_conf** (*Defaults to `{"elasticsearch":{"hosts":["localhost:9200"]}}`*): Output configuration. Map is serialized into output section of beat config.
 - **beats_pid_dir** (*Defaults to `/var/run`*): Location of beats pid file.
 - **beats_conf_dir** (*Defaults to `/etc/{beat}`*): Location of conf directory for beats configuration file.
+- **default_ilm_policy** (*Defaults undefined*): local path to default policy if any custom one is defined
+
+### Focus on ILM
+
+By default, *beat* will create a default policy defined as part of the beat being deployed.
+You can override default ILM setup by defining ILM conf as part of *beat_conf*.
+For example:
+
+```
+- role: ansible-beats
+  beat: metricbeat
+  beat_conf:
+    setup:
+      ilm:
+        policy_file: /etc/filebeat/policies/my-default-metricbeat.json
+        overwrite: true
+      metricbeat.modules:
+        ...
+  default_ilm_policy: conf/my-default-metricbeat.json
+  become: yes
+```
+
+This will copy *conf/my-default-filebeat.json* to */etc/filebeat/policies/my-default-filebeat.json*.
+This policy will be used as default one for this beat.
 
 ## License
 

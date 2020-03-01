@@ -9,6 +9,11 @@
     msg: "beat_conf must be specified"
   when: beat_conf is not defined
 
+- name: Check ILM variables
+  fail:
+    msg: "beat_conf.setup.ilm.policy_file must be specified if default_ilm_policy is used"
+  when: default_ilm_policy is defined and beat_conf.setup.ilm.policy_file is not defined
+
 - name: Set beats_major_version
   set_fact:
     beats_major_version: '{% if oss_version %}oss-{% endif %}{{ beats_version.split(".")[0] }}.x'
