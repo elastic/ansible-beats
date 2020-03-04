@@ -1,6 +1,7 @@
 ---
 
 - name: Debian - Ensure apt-transport-https is installed
+  become: yes
   apt:
     name: apt-transport-https
     state: present
@@ -11,6 +12,7 @@
   notify: restart the service
 
 - name: Debian - Ensure python-urllib3, python-openssl, python-pyasn1 & python-pip are installed
+  become: yes
   apt:
     name:
       - python-urllib3
@@ -25,6 +27,7 @@
     - ansible_distribution_release == "trusty"
 
 - name: Debian - ensure ndg-httpsclient pip is installed
+  become: yes
   pip:
     name: ndg-httpsclient
     state: present
@@ -35,6 +38,7 @@
     - ansible_distribution_release == "trusty"
 
 - name: Debian - Add Beats repository key
+  become: yes
   apt_key:
     url: '{{ elastic_repo_key }}'
     state: present
@@ -43,6 +47,7 @@
   when: use_repository | bool
 
 - name: Debian - add beats repository
+  become: yes
   apt_repository:
     repo: 'deb {{ repo_url }} stable main'
     state: present
@@ -51,10 +56,12 @@
   when: use_repository | bool
 
 - name: Debian - unhold {{ beat }} version for install
+  become: yes
   command: apt-mark unhold {{ beat }}
   changed_when: false
 
 - name: Debian - Ensure {{ beat }} is installed
+  become: yes
   apt:
     name: >-
       {{ beat }}{% if beats_version is defined and beats_version|length>0 %}={{ beats_version }}{% endif %}
@@ -66,6 +73,7 @@
   notify: restart the service
 
 - name: Debian - hold {{ beat }} version
+  become: yes
   command: apt-mark hold {{ beat }}
   when: version_lock
   changed_when: false
@@ -85,6 +93,7 @@
   when: not use_repository | bool
 
 - name: Debian - Ensure {{ beat }} is installed from downloaded package
+  become: yes
   apt:
     deb: '/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb'
   when: not use_repository | bool

@@ -1,5 +1,6 @@
 ---
 - name: Ensure libselinux-python on CentOS 6.x
+  become: yes
   yum:
     name: libselinux-python
     state: present
@@ -11,12 +12,14 @@
     - ansible_distribution_major_version == "6"
 
 - name: Redhat - add beats repository
+  become: yes
   template:
     src: beats.repo.j2
     dest: /etc/yum.repos.d/beats.repo
   when: use_repository
 
 - name: RedHat - install yum-version-lock
+  become: yes
   yum:
     name: yum-plugin-versionlock
     state: present
@@ -25,12 +28,14 @@
   until: versionlock_install is succeeded
 
 - name: RedHat - unlock {{ beat }} for install
+  become: yes
   shell: yum versionlock delete {{ beat }} || true
   changed_when: false
   tags:
     - skip_ansible_lint
 
 - name: RedHat - Ensure {{ beat }} is installed
+  become: yes
   yum:
     name: >-
       {{ beat }}{% if beats_version is defined and beats_version|length %}-{{ beats_version }}{% endif %}
@@ -42,6 +47,7 @@
   notify: restart the service
 
 - name: RedHat - lock {{ beat }} version
+  become: yes
   shell: >-
     yum versionlock add
     {{ beat }}{% if beats_version is defined and beats_version|length %}-{{ beats_version }}{% endif %}
@@ -51,6 +57,7 @@
     - skip_ansible_lint
 
 - name: RedHat - Install {{ beat }} from url
+  become: yes
   yum:
     name: >-
       {% if custom_package_url is defined %}{{ custom_package_url }}{%

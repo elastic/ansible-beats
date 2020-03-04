@@ -15,6 +15,7 @@
 
 # Make sure the service is started, and restart if necessary
 - name: Start {{ beat_product }} service
+  become: yes
   service:
     name: '{{ beat }}'
     state: started
