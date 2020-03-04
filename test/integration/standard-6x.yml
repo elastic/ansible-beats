@@ -12,5 +12,5 @@
               input_type: log
           registry_file: /var/lib/filebeat/registry
   vars:
-    beats_version: 6.8.6
+    beats_version: 6.8.7
     use_repository: "true"
