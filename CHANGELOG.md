@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.6.1 - 2020/03/04
+
+* 7.6.1 as default version
+
+
 ## 7.6.0 - 2020/02/11
 
 * 7.6.0 as default version
