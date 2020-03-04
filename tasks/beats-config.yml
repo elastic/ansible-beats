@@ -26,6 +26,7 @@
   register: pid_stat
 
 - name: Create PID Directory
+  become: yes
   file:
     path: '{{ beats_pid_dir }}'
     state: directory
@@ -34,12 +35,14 @@
 # fail if pid and config directories are not links or not directories i.e files
 
 - name: Create Config Directory
+  become: yes
   file:
     path: '{{ beats_conf_dir }}'
     state: directory
 
 # Copy the default file
 - name: Copy Default File for Instance
+  become: yes
   template:
     src: beat.j2
     dest: '{{ instance_default_file }}'
@@ -51,6 +54,7 @@
 
 # Copy templated config file
 - name: Copy Configuration File for {{ beat }}
+  become: yes
   template:
     src: beat.yml.j2
     dest: '{{ conf_file }}'

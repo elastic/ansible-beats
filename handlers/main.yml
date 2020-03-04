@@ -2,6 +2,7 @@
 # handlers file for beats
 
 - name: restart the service
+  become: yes
   service: 
     name: "{{ beat_product }}" 
     state: restarted 
