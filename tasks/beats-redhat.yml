@@ -16,7 +16,7 @@
   template:
     src: beats.repo.j2
     dest: /etc/yum.repos.d/beats.repo
-  when: use_repository
+  when: beats_add_repository | bool
 
 - name: RedHat - install yum-version-lock
   become: yes
@@ -24,6 +24,7 @@
     name: yum-plugin-versionlock
     state: present
     update_cache: true
+  when: version_lock | bool
   register: versionlock_install
   until: versionlock_install is succeeded
 
@@ -31,6 +32,7 @@
   become: yes
   shell: yum versionlock delete {{ beat }} || true
   changed_when: false
+  when: version_lock | bool
   tags:
     - skip_ansible_lint
 
@@ -43,7 +45,7 @@
     update_cache: true
   register: beat_install
   until: beat_install is succeeded
-  when: use_repository
+  when: use_repository | bool
   notify: restart the service
 
 - name: RedHat - lock {{ beat }} version
@@ -51,7 +53,7 @@
   shell: >-
     yum versionlock add
     {{ beat }}{% if beats_version is defined and beats_version|length %}-{{ beats_version }}{% endif %}
-  when: version_lock
+  when: version_lock | bool
   changed_when: false
   tags:
     - skip_ansible_lint

@@ -167,6 +167,7 @@ Supported variables are as follows:
 - **beats_version** (*Defaults to `7.6.1`*): Beats version.
 - **version_lock** (*Defaults to `false`*): Locks the installed version if set to true, thus preventing other processes from updating. This will not impact the roles ability to update the beat on subsequent runs (it unlocks and re-locks if required).
 - **use_repository** (*Defaults to `true`*): Use elastic repo for yum or apt if true. If false, a custom custom_package_url must be provided.
+- **beats_add_repository** (*Defaults to `{use_repository}`*): Install elastic repo for yum or apt if true. If false, the present repositories will be used. Useful if you already have beats packages in your repo.
 - **start_service** (*Defaults to `true`*): service will be started if true, false otherwise.
 - **restart_on_change** (*Defaults to `true`*): Changes to configuration or installed versions, will result in a restart if true.
 - **daemon_args** (*Applicable to version 1.x of beats*): Allows run time params to be passed to beats.
