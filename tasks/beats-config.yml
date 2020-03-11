@@ -63,3 +63,17 @@
     owner: root
     group: root
   notify: restart the service
+
+# Copy default ILM policy file
+- name: Create default policies config directory
+  file:
+    path: '{{ beat_conf.setup.ilm.policy_file | dirname }}'
+    state: directory
+  when: default_ilm_policy is defined
+
+- name: Copy default ILM policy file for {{ beat }}
+  copy:
+    src: '{{default_ilm_policy}}'
+    dest: '{{ beat_conf.setup.ilm.policy_file }}'
+  when: default_ilm_policy is defined
+  notify: restart the service
