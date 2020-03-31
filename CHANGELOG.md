@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.6.2 - 2020/03/31
+
+* 7.6.2 as default version
+* 6.8.8 as 6.x tested version
+
+| PR                                                     | Author                             | Title                                                                     |
+| ------------------------------------------------------ | ---------------------------------- | ------------------------------------------------------------------------- |
+|[#77](https://github.com/elastic/ansible-beats/pull/77) | [@jmlrt](https://github.com/jmlrt) | Add become to individual tasks                                            |
+|[#75](https://github.com/elastic/ansible-beats/pull/75) | [@ktibi](https://github.com/ktibi) | Add option to disable the repo installation and lock package installation |
+|[#78](https://github.com/elastic/ansible-beats/pull/78) | [@astik](https://github.com/astik) | Aad task to create directory for default policies                         |
+
+
 ## 7.6.1 - 2020/03/04
 
 * 7.6.1 as default version
