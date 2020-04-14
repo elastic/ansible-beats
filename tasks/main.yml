@@ -4,7 +4,8 @@
 - name: check-parameters
   include_tasks: beats-param-check.yml
 
-- set_fact:
+- name: define beat product
+  set_fact:
     beat_product: "{{ beat }}"
 
 - name: os-specific vars
