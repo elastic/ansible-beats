@@ -67,6 +67,7 @@ platforms:
     driver_config:
       image: centos:7
       provision_command:
+        - yum -y install epel-release
         - yum -y install ansible
       run_command: "/usr/sbin/init"
       privileged: true
