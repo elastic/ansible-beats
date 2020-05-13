@@ -4,6 +4,7 @@
 
 * 7.7.0 as default version
 * 6.8.9 as 6.x tested version
+* Fix CentOS tests in [#86](https://github.com/elastic/ansible-beats/pull/86) ([@jmlrt](https://github.com/jmlrt))
 
 | PR                                                      | Author                                   | Title                                       |
 |---------------------------------------------------------|------------------------------------------|---------------------------------------------|
