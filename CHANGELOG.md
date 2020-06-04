@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.7.1 - 2020/06/04
+
+* 7.7.1 as default version
+* 6.8.10 as 6.x tested version
+
 ## 7.7.0 - 2020/05/13
 
 * 7.7.0 as default version
