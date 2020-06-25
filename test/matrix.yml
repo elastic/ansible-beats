@@ -7,6 +7,7 @@ OS:
   - debian-9
   - centos-6
   - centos-7
+  - amazonlinux-2
 TEST_TYPE:
   - standard
   - standard-6x
