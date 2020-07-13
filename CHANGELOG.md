@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.8.1 - 2020/07/16
+
+* 7.8.1 as default version
+* 6.8.11 as 6.x tested version
+
+| PR                                                      | Author                             | Title                    |
+|---------------------------------------------------------|------------------------------------|--------------------------|
+| [#89](https://github.com/elastic/ansible-beats/pull/89) | [@jmlrt](https://github.com/jmlrt) | Add amazonlinux2 support |
+
+
 ## 7.8.0 - 2020/06/18
 
 * 7.8.0 as default version
