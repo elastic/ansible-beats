@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.9.1 - 2020/09/03
+
+* 7.9.1 as default version
+
 ## 7.9.0 - 2020/08/18
 
 * 7.9.0 as default version
