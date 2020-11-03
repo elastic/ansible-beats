@@ -17,3 +17,4 @@
 - name: Set beats_major_version
   set_fact:
     beats_major_version: '{% if oss_version %}oss-{% endif %}{{ beats_version.split(".")[0] }}.x'
+  when: beats_major_version is not defined
