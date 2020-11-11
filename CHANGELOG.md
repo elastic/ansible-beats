@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.10.0
+
+* 7.10.0 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#113](https://github.com/elastic/ansible-beats/pull/113) | [@jmlrt](https://github.com/jmlrt) | [meta] clean deprecated bumper script  |
+
+
 ## 7.9.3
 
 * 7.9.3 as default version.
