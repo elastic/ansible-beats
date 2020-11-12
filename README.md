@@ -20,10 +20,13 @@ This role provides a generic means of installing Elastic supported Beats
 * Ubuntu 14.04
 * Ubuntu 16.04
 * Ubuntu 18.04
+* Ubuntu 20.04
 * Debian 8
 * Debian 9
+* Debian 10
 * CentOS 6
 * CentOS 7
+* CentOS 8
 * Amazon Linux 2
 
 ## Usage
