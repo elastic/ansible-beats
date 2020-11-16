@@ -22,6 +22,7 @@ This role provides a generic means of installing Elastic supported Beats
 * Ubuntu 18.04
 * Debian 8
 * Debian 9
+* Debian 10
 * CentOS 6
 * CentOS 7
 * CentOS 8
