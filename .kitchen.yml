@@ -75,6 +75,15 @@ platforms:
       run_command: "/usr/sbin/init"
       privileged: true
       use_sudo: false
+  - name: centos-8
+    driver_config:
+      image: centos:8
+      provision_command:
+        - yum -y install epel-release
+        - yum -y install ansible
+      run_command: "/usr/sbin/init"
+      privileged: true
+      use_sudo: false
   - name: amazonlinux-2
     driver_config:
       image: amazonlinux:2
