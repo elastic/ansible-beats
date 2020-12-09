@@ -5,7 +5,6 @@ OS:
   - ubuntu-1804
   - debian-8
   - debian-9
-  - centos-6
   - centos-7
   - centos-8
   - amazonlinux-2
