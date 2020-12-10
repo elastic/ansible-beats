@@ -31,7 +31,7 @@ This role provides a generic means of installing Elastic supported Beats
 Create your Ansible playbook with your own tasks, and include the role beats. You will have to have this repository accessible within the context of playbook.
 
 ```sh
-ansible-galaxy install elastic.beats,7.10.1
+ansible-galaxy install elastic.beats,v7.10.1
 ```
 
 Then create your playbook yaml adding the role beats.
