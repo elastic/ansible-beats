@@ -4,6 +4,12 @@
 
 * 7.10.2 as default version.
 
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#123](https://github.com/elastic/ansible-beats/pull/123) | [@jmlrt](https://github.com/jmlrt) | Cleanup init_script variable  |
+
+
 ## 7.10.1
 
 * 7.10.1 as default version.
