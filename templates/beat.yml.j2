@@ -13,6 +13,11 @@
 
 {{ beat_output_conf | to_nice_yaml(indent=2) }}
 
+{% if beat_setup_conf is defined %}############################## Setup ##########################################
+
+{{ beat_setup_conf | to_nice_yaml(indent=2) }}
+{% endif %}
+
 {% if shipper_conf is defined %}############################# Shipper #########################################
 
 {{ beat_shipper_conf | to_nice_yaml(indent=2) }}
