@@ -17,3 +17,8 @@
 - name: Set beats_major_version
   set_fact:
     beats_major_version: '{% if oss_version %}oss-{% endif %}{{ beats_version.split(".")[0] }}.x'
+
+- name: Set beats_allow_downgrade variable if not defined
+  set_fact:
+    beats_allow_downgrade: "false"
+  when: beats_allow_downgrade is not defined

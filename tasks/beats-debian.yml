@@ -66,6 +66,7 @@
     name: >-
       {{ beat }}{% if beats_version is defined and beats_version|length>0 %}={{ beats_version }}{% endif %}
     state: present
+    force: "{{ beats_allow_downgrade | bool }}"
     cache_valid_time: 86400
   register: beat_install
   until: beat_install is succeeded
@@ -96,5 +97,6 @@
   become: yes
   apt:
     deb: '/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb'
+    force: "{{ beats_allow_downgrade | bool }}"
   when: not use_repository | bool
   notify: restart the service
