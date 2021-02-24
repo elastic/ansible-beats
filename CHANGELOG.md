@@ -1,5 +1,31 @@
 # Changelog
 
+## 7.11.1
+
+* 7.11.1 as default version.
+* 6.8.14 as 6.x tested version
+
+## 7.10.2
+
+* 7.10.2 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#123](https://github.com/elastic/ansible-beats/pull/123) | [@jmlrt](https://github.com/jmlrt) | Cleanup init_script variable  |
+
+
+## 7.10.1
+
+* 7.10.1 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#115](https://github.com/elastic/ansible-beats/pull/115) | [@v1v](https://github.com/v1v) | Support CentOS-8  |
+| [#120](https://github.com/elastic/ansible-beats/pull/120) | [@jmlrt](https://github.com/jmlrt) | Remove CentOS 6 support |
+
+
 ## 7.10.0
 
 * 7.10.0 as default version.

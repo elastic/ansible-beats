@@ -6,7 +6,7 @@ OS:
   - ubuntu-2004
   - debian-8
   - debian-9
-  - centos-6
+  - debian-10
   - centos-7
   - centos-8
   - amazonlinux-2

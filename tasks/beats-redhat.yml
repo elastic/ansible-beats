@@ -1,16 +1,4 @@
 ---
-- name: Ensure libselinux-python on CentOS 6.x
-  become: yes
-  yum:
-    name: libselinux-python
-    state: present
-    update_cache: true
-  register: libselinux_install
-  until: libselinux_install is succeeded
-  when:
-    - ansible_distribution == "CentOS"
-    - ansible_distribution_major_version == "6"
-
 - name: Redhat - add beats repository
   become: yes
   template:
