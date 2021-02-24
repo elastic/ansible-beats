@@ -44,12 +44,8 @@ platforms:
       image: ubuntu:20.04
       privileged: true
       provision_command:
-        # TODO: focal is not yet released for ansible https://github.com/ansible/ansible/pull/69161
-        # - apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:ansible/ansible
-        # - apt-get update && apt-get -y -q install ansible python-apt python-pycurl
-        # Workaround with pip
-        - apt-get update && apt-get -y -q install python-apt python-pycurl python3-pip
-        - pip3 install ansible
+        - apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:ansible/ansible
+        - apt-get update && apt-get -y -q install ansible python-apt python-pycurl
       use_sudo: false
   - name: debian-8
     driver_config:
