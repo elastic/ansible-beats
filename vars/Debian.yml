@@ -1,4 +1,3 @@
 ---
 default_file: "/etc/default"
-init_script: "/etc/init.d"
 repo_url: "https://artifacts.elastic.co/packages/{{ beats_major_version }}/apt"
