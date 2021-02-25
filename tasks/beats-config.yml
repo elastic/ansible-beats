@@ -85,3 +85,15 @@
     group: root
   when: default_ilm_policy is defined
   notify: restart the service
+
+- name: Assert modules.path presence
+  assert:
+    that:
+      - beat_conf.filebeat.config.modules.path is defined
+    fail_msg: 'You need to configure beat_conf.filebeat.config.modules.path for modules to be loaded'
+  when: beat_modules is defined
+
+- name: Set up and configure modules
+  include_tasks: beats-modules.yml
+  with_dict: "{{ beat_modules }}"
+  when: beat_modules is defined

@@ -1,0 +1,24 @@
+- name: Disable modules
+  become: yes
+  file:
+    path: "{{ beats_modules_dir }}/{{ item.key }}.yml"
+    state: absent
+  when: item.value.enabled is defined and not item.value.enabled
+  notify: restart the service
+
+- name: Enable modules with default config
+  become: yes
+  copy:
+    remote_src: yes
+    src: "{{ beats_modules_dir }}/{{ item.key }}.yml.disabled"
+    dest: "{{ beats_modules_dir }}/{{ item.key }}.yml"
+  when: (not item.value.enabled is defined or item.value.enabled) and not item.value.config is defined
+  notify: restart the service
+
+- name: Set up modules with custom config
+  become: yes
+  copy:
+    content: "{{ item.value.config | to_nice_yaml(indent=2) }}"
+    dest: "{{ beats_modules_dir }}/{{ item.key }}.yml"
+  when: (not item.value.enabled is defined or item.value.enabled) and item.value.config is defined
+  notify: restart the service
