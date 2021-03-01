@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.99.0
+
+* 7.99.0 as default version.
+* 6.8.99 as 6.x tested version
+
 ## 7.11.1
 
 * 7.11.1 as default version.
