@@ -14,14 +14,6 @@ provisioner:
   idempotency_test: true
 
 platforms:
-  - name: ubuntu-14.04
-    driver_config:
-      image: ubuntu:14.04
-      privileged: true
-      provision_command:
-        - apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:ansible/ansible
-        - apt-get update && apt-get -y -q install ansible python-apt python-pycurl
-      use_sudo: false
   - name: ubuntu-16.04
     driver_config:
       image: ubuntu:16.04
