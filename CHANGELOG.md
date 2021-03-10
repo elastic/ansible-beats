@@ -4,7 +4,6 @@
 
 * 7.11.2 as default version.
 
-
 | PR | Author | Title |
 | --- | --- | --- |
 | [#135](https://github.com/elastic/ansible-beats/pull/135) | [@v1v](https://github.com/v1v) | Update metadata reference for CentOS 8  |
