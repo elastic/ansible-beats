@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.12.0
+
+* 7.12.0 as default version.
+* 6.8.15 as 6.x tested version
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#138](https://github.com/elastic/ansible-beats/pull/138) | [@jmlrt](https://github.com/jmlrt) | [meta] fix changelog after 7.11.2 release  |
+
+
 ## 7.11.2
 
 * 7.11.2 as default version.
