@@ -3,7 +3,7 @@
 ## 7.13.0
 
 * 7.13.0 as default version.
-* 6.8.17 as 6.x tested version
+* 6.8.16 as 6.x tested version
 
 ## 7.12.1
 
