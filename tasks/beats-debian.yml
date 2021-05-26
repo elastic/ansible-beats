@@ -1,5 +1,4 @@
 ---
-
 - name: Debian - Ensure apt-transport-https is installed
   become: yes
   apt:
@@ -40,7 +39,7 @@
 - name: Debian - Add Beats repository key
   become: yes
   apt_key:
-    url: '{{ elastic_repo_key }}'
+    url: "{{ elastic_repo_key }}"
     state: present
   register: apt_key_install
   until: apt_key_install is succeeded
@@ -49,15 +48,22 @@
 - name: Debian - add beats repository
   become: yes
   apt_repository:
-    repo: 'deb {{ repo_url }} stable main'
+    repo: "deb {{ repo_url }} stable main"
     state: present
   register: repo_install
   until: repo_install is succeeded
   when: beats_add_repository | bool
 
+- name: Debian - Check if {{ beat }}  package is installed
+  package_facts:
+    manager: apt
+
 - name: Debian - unhold {{ beat }} version for install
   become: yes
-  command: apt-mark unhold {{ beat }}
+  dpkg_selections:
+    name: "{{ beat }}"
+    selection: "install"
+  when: beat in ansible_facts.packages
   changed_when: false
 
 - name: Debian - Ensure {{ beat }} is installed
@@ -74,7 +80,9 @@
 
 - name: Debian - hold {{ beat }} version
   become: yes
-  command: apt-mark hold {{ beat }}
+  dpkg_selections:
+    name: "{{ beat }}"
+    selection: "hold"
   when: version_lock
   changed_when: false
 
@@ -88,13 +96,13 @@
     url: >-
       {% if custom_package_url is defined %}{{ custom_package_url }}{%
         else %}{{ beats_package_url }}/{{ beat }}/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb{% endif %}
-    dest: '/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb'
+    dest: "/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb"
     validate_certs: false
   when: not use_repository | bool
 
 - name: Debian - Ensure {{ beat }} is installed from downloaded package
   become: yes
   apt:
-    deb: '/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb'
+    deb: "/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb"
   when: not use_repository | bool
   notify: restart the service
