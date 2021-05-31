@@ -95,3 +95,29 @@ remote_monitoring_user_pass=changeme
 beats_mon_user_pass=changeme
 elasticsearch_mon_host=["es1-mon.example.com:9200","es2-mon.example.com:9200","es3-mon.example.com:9200"]
 ```
+
+### Bonus
+Playbook for removing metricbeat
+```yml
+- hosts:  es-nodes
+  tasks:
+    - service:
+        name: metricbeat.service
+        state: stopped
+      become: true  
+    - yum:
+        name: metricbeat
+        state: absent
+      become: true
+    - ansible.builtin.systemd:
+        daemon_reexec: yes
+      become: true  
+    - file:
+        path: "{{item}}"
+        state: absent
+      with_items:
+        - /etc/metricbeat
+        - /usr/share/metricbeat
+        - /var/lib/metricbeat
+      become: true
+```	  
