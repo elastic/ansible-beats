@@ -1,0 +1,24 @@
+
+- name: Ensure certificate directory exists
+  become: yes
+  file:
+    dest: "{{es_ssl_certificate_path}}"
+    state: directory
+    owner: root
+    group: "{{ es_group }}"
+    mode: "750"
+  when: es_ssl_upload
+  
+
+- name: Upload SSL CA files for monitored  and output ES clusters
+  become: yes
+  copy:
+    src: "{{ item }}"
+    dest: "{{ es_ssl_certificate_path }}/{{ item | basename }}"
+    owner: "{{ root }}"
+    group: "{{ root }}"
+    mode: "640"
+  with_items:
+    - "{{ es_output_ssl_ca }}"
+    - "{{ es_mon_ssl_ca }}"
+  when: es_ssl_upload and es_enable_sll 

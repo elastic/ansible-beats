@@ -9,10 +9,19 @@
   include_tasks: beats-redhat.yml
   when: ansible_os_family == 'RedHat'
 
+#Upload SSL Ca files for ES monitoringing and output
+- name: Upload SSL CA files 
+  include_tasks: beats-ssl.yml
+  when: es_enable_sll and es_ssl_upload
+  
+- name: Enable Beats keystore 
+  include_tasks: beats-keystore.yml
+  when: es_output_pass and enable_keystore
+  
 # Configuration file for beats
 - name: Beats configuration
-  include_tasks: beats-config.yml
-
+  include_tasks: beats-config.yml 
+  
 # Make sure the service is started, and restart if necessary
 - name: Start {{ beat_product }} service
   become: yes
