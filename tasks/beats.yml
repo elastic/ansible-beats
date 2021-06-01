@@ -12,7 +12,7 @@
 #Upload SSL Ca files for ES monitoringing and output
 - name: Upload SSL CA files 
   include_tasks: beats-ssl.yml
-  when: es_enable_sll and es_ssl_upload
+  when: es_enable_ssl and es_ssl_upload
   
 - name: Enable Beats keystore 
   include_tasks: beats-keystore.yml

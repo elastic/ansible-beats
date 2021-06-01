@@ -21,4 +21,4 @@
   with_items:
     - "{{ es_output_ssl_ca }}"
     - "{{ es_mon_ssl_ca }}"
-  when: es_ssl_upload and es_enable_sll 
+  when: es_ssl_upload and es_enable_ssl

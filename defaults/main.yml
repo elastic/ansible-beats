@@ -19,6 +19,6 @@ es_output_pass: ''
 es_output_ssl_ca: ''
 es_mon_ssl_ca: ''
 
-es_enable_sll: false
+es_enable_ssl: false
 es_ssl_upload: false
 es_ssl_certificate_path: "{{ beats_conf_dir }}/certs"
