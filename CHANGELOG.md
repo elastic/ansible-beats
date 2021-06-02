@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.13.1
+
+* 7.13.1 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#146](https://github.com/elastic/ansible-beats/pull/146) | [@jmlrt](https://github.com/jmlrt) | Fix unhold issue with custom deb packages  |
+
+
 ## 7.13.0
 
 * 7.13.0 as default version.
