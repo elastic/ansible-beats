@@ -1,6 +1,6 @@
 ---
 # defaults file for beats
-beats_version: 7.13.1
+beats_version: 7.13.2
 oss_version: false
 version_lock: false
 use_repository: true
