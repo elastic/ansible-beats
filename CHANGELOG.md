@@ -1,5 +1,16 @@
 # Changelog
 
+## 7.13.3
+
+* 7.13.3 as default version.
+* 6.8.17 as 6.x tested version
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#148](https://github.com/elastic/ansible-beats/pull/148) | [@metabsd](https://github.com/metabsd) | Backup the existing configuration file  |
+
+
 ## 7.13.2
 
 * 7.13.2 as default version.
