@@ -15,6 +15,12 @@
       shipper: '{{ shipper_conf }}'
   when: shipper_conf is defined
 
+- name: Set beat_setup_conf
+  set_fact:
+    beat_setup_conf:
+      setup: '{{ setup_conf }}'
+  when: setup_conf is defined
+
 - name: Set beat_logging_conf
   set_fact:
     beat_logging_conf:
