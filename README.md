@@ -178,6 +178,7 @@ Supported variables are as follows:
 - **output_conf** (*Defaults to `{"elasticsearch":{"hosts":["localhost:9200"]}}`*): Output configuration. Map is serialized into output section of beat config.
 - **beats_pid_dir** (*Defaults to `/var/run`*): Location of beats pid file.
 - **beats_conf_dir** (*Defaults to `/etc/{beat}`*): Location of conf directory for beats configuration file.
+- **beats_modules_dir** (*Defaults to `/etc/{beat}/modules.d`*): Location of conf directory for beats modules.
 - **default_ilm_policy** (*Defaults undefined*): local path to default policy if any custom one is defined
 
 ### Focus on ILM
