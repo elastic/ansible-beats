@@ -1,5 +1,72 @@
 # Changelog
 
+## 7.14.0
+
+* 7.14.0 as default version.
+* 6.8.18 as 6.x tested version
+
+## 7.13.4
+
+* 7.13.4 as default version.
+
+## 7.13.3
+
+* 7.13.3 as default version.
+* 6.8.17 as 6.x tested version
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#148](https://github.com/elastic/ansible-beats/pull/148) | [@metabsd](https://github.com/metabsd) | Backup the existing configuration file  |
+
+
+## 7.13.2
+
+* 7.13.2 as default version.
+
+## 7.13.1
+
+* 7.13.1 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#146](https://github.com/elastic/ansible-beats/pull/146) | [@jmlrt](https://github.com/jmlrt) | Fix unhold issue with custom deb packages  |
+
+
+## 7.13.0
+
+* 7.13.0 as default version.
+* 6.8.16 as 6.x tested version
+
+## 7.12.1
+
+* 7.12.1 as default version.
+
+## 7.12.0
+
+* 7.12.0 as default version.
+* 6.8.15 as 6.x tested version
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#138](https://github.com/elastic/ansible-beats/pull/138) | [@jmlrt](https://github.com/jmlrt) | [meta] fix changelog after 7.11.2 release  |
+
+
+## 7.11.2
+
+* 7.11.2 as default version.
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#135](https://github.com/elastic/ansible-beats/pull/135) | [@v1v](https://github.com/v1v) | Update metadata reference for CentOS 8  |
+| [#134](https://github.com/elastic/ansible-beats/pull/134) | [@v1v](https://github.com/v1v) | Remove Ubuntu-14.04 support  |
+| [#118](https://github.com/elastic/ansible-beats/pull/118) | [@v1v](https://github.com/v1v) | Support ubuntu-20  |
+| [#116](https://github.com/elastic/ansible-beats/pull/116) | [@v1v](https://github.com/v1v) | Support debian 10  |
+| [#131](https://github.com/elastic/ansible-beats/pull/131) | [@jmlrt](https://github.com/jmlrt) | Copy ILM policy file with root permission  |
+
+
 ## 7.11.1
 
 * 7.11.1 as default version.
