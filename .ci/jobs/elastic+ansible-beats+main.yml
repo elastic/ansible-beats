@@ -1,8 +1,12 @@
 ---
 - job:
-    name: elastic+ansible-beats+master
-    display-name: elastic / ansible-beats - master
-    description: Master branch testing with test kitchen
+    name: elastic+ansible-beats+main
+    display-name: elastic / ansible-beats - main
+    description: Main branch testing with test kitchen
+    scm:
+      - git:
+          branches:
+            - refs/heads/main
     triggers:
     - timed: H H(02-04) * * *
     builders:
