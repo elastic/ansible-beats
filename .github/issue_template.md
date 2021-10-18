@@ -26,7 +26,7 @@ Issues that do not follow these guidelines are likely to be closed.
 
 **Beats version**
 
-**Role version**:  (If using master please specify github sha)
+**Role version**:  (If using main please specify github sha)
 
 **OS version** (`uname -a` if on a Unix-like system):
 
