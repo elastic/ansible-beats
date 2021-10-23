@@ -14,10 +14,10 @@ These passwords are accessible in the beats configuration file via `nd `"${REMOT
 
 ## Upload SSL CA files for the monitored and monitoring cluster.
 
-To use this feature set  `es_enable_sll: true` and `es_ssl_upload: true`.
+To use this feature set  `es_enable_ssl: true` and `es_ssl_upload: true`.
 
 ```yml
-    es_enable_sll: true
+    es_enable_ssl: true
     es_ssl_upload: true
     es_output_ssl_ca: "files/certs/es-output.ca"
     es_mon_ssl_ca: "files/certs/es-mon.ca"
@@ -45,7 +45,7 @@ openssl s_client -showcerts \
     remote_monitoring_pass: "{{remote_monitoring_user_pass}}"
     es_output_pass: "{{beats_mon_user_pass}}"
     enable_keystore: true
-    es_enable_sll: true
+    es_enable_ssl: true
     es_ssl_upload: true
     es_output_ssl_ca: "files/certs/es-output.ca"
     es_mon_ssl_ca: "files/certs/es-mon.ca"
