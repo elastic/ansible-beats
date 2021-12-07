@@ -2,6 +2,8 @@
 [![Build Status](https://img.shields.io/jenkins/s/https/devops-ci.elastic.co/job/elastic+ansible-beats+main.svg)](https://devops-ci.elastic.co/job/elastic+ansible-beats+main/)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-elastic.beats-blue.svg)](https://galaxy.ansible.com/elastic/beats/)
 
+⚠️ **This Ansible role is being deprecated and will not be updated to support Beats 8.0.0 and the following versions.**
+
 This role provides a generic means of installing Elastic supported Beats
 
 **Tested Beats**
