@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.16.0
+
+* 7.16.0 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#160](https://github.com/elastic/ansible-beats/pull/160) | [@ygel](https://github.com/ygel) | Rename master - main  |
+
+
 ## 7.15.1
 
 * 7.15.1 as default version.
