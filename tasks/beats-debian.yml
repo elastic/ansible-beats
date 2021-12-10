@@ -54,7 +54,7 @@
   until: repo_install is succeeded
   when: beats_add_repository | bool
 
-- name: Debian - Check if {{ beat }}  package is installed
+- name: Debian - Check if {{ beat }} package is installed
   package_facts:
     manager: apt
 

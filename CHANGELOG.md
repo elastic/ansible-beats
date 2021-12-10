@@ -1,5 +1,43 @@
 # Changelog
 
+## 7.16.0
+
+* 7.16.0 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#160](https://github.com/elastic/ansible-beats/pull/160) | [@ygel](https://github.com/ygel) | Rename master - main  |
+
+
+## 7.15.1
+
+* 7.15.1 as default version.
+
+## 7.15.0
+
+* 7.15.0 as default version.
+
+## 7.14.0
+
+* 7.14.0 as default version.
+* 6.8.18 as 6.x tested version
+
+## 7.13.4
+
+* 7.13.4 as default version.
+
+## 7.13.3
+
+* 7.13.3 as default version.
+* 6.8.17 as 6.x tested version
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#148](https://github.com/elastic/ansible-beats/pull/148) | [@metabsd](https://github.com/metabsd) | Backup the existing configuration file  |
+
+
 ## 7.13.2
 
 * 7.13.2 as default version.
