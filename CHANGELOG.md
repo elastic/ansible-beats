@@ -1,5 +1,17 @@
 # Changelog
 
+## 7.16.1
+
+* 7.16.1 as default version.
+* 6.8.21 as 6.x tested version
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#166](https://github.com/elastic/ansible-beats/pull/166) | [@mgreau](https://github.com/mgreau) | Add warning message about 8.x versions  |
+| [#164](https://github.com/elastic/ansible-beats/pull/164) | [@seadog007](https://github.com/seadog007) | Remove duplicated space  |
+
+
 ## 7.16.0
 
 * 7.16.0 as default version.
