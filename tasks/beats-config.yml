@@ -46,7 +46,7 @@
   template:
     src: beat.j2
     dest: '{{ instance_default_file }}'
-    mode: 0644
+    mode: 0640
     force: true
     owner: root
     group: root
@@ -58,7 +58,7 @@
   template:
     src: beat.yml.j2
     dest: '{{ conf_file }}'
-    mode: 0644
+    mode: 0640
     force: true
     owner: root
     group: root
@@ -81,7 +81,7 @@
   copy:
     src: '{{default_ilm_policy}}'
     dest: '{{ beat_conf.setup.ilm.policy_file }}'
-    mode: 0644
+    mode: 0640
     owner: root
     group: root
   when: default_ilm_policy is defined
