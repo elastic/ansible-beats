@@ -1,5 +1,45 @@
 # Changelog
 
+## 7.16.3
+
+* 7.16.3 as default version.
+* 6.8.23 as 6.x tested version
+
+## 7.16.2
+
+* 7.16.2 as default version.
+* 6.8.22 as 6.x tested version
+
+## 7.16.1
+
+* 7.16.1 as default version.
+* 6.8.21 as 6.x tested version
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#166](https://github.com/elastic/ansible-beats/pull/166) | [@mgreau](https://github.com/mgreau) | Add warning message about 8.x versions  |
+| [#164](https://github.com/elastic/ansible-beats/pull/164) | [@seadog007](https://github.com/seadog007) | Remove duplicated space  |
+
+
+## 7.16.0
+
+* 7.16.0 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#160](https://github.com/elastic/ansible-beats/pull/160) | [@ygel](https://github.com/ygel) | Rename master - main  |
+
+
+## 7.15.1
+
+* 7.15.1 as default version.
+
+## 7.15.0
+
+* 7.15.0 as default version.
+
 ## 7.14.0
 
 * 7.14.0 as default version.
