@@ -1,5 +1,15 @@
 # Changelog
 
+## 7.17.0
+
+* 7.17.0 as default version.
+
+
+| PR | Author | Title |
+| --- | --- | --- |
+| [#175](https://github.com/elastic/ansible-beats/pull/175) | [@jmlrt](https://github.com/jmlrt) | Remove CentOS 8 tests  |
+
+
 ## 7.16.3
 
 * 7.16.3 as default version.
