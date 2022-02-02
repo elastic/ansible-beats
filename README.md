@@ -190,6 +190,7 @@ Supported variables are as follows:
 - **beats_pid_dir** (*Defaults to `/var/run`*): Location of beats pid file.
 - **beats_conf_dir** (*Defaults to `/etc/{beat}`*): Location of conf directory for beats configuration file.
 - **default_ilm_policy** (*Defaults undefined*): local path to default policy if any custom one is defined
+- **setup_conf** (*Defaults undefined*): Setup of kibana and dashboard configuration. Should be defined as a map . Map is serialized into setup section of beat config.
 
 ### Focus on ILM
 
