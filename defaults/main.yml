@@ -12,3 +12,13 @@ logging_conf: {"files":{"rotateeverybytes":10485760}}
 output_conf: {"elasticsearch":{"hosts":["localhost:9200"]}}
 beats_pid_dir: "/var/run"
 beats_conf_dir: "/etc/{{beat}}"
+beats_data_dir: "/var/lib/{{beat}}"
+beats_home_dir: "/usr/share/{{beat}}"
+enable_keystore: false
+es_output_pass: ''
+es_output_ssl_ca: ''
+es_mon_ssl_ca: ''
+
+es_enable_ssl: false
+es_ssl_upload: false
+es_ssl_certificate_path: "{{ beats_conf_dir }}/certs"
