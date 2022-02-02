@@ -89,7 +89,7 @@
 - name: Set os_arch
   set_fact:
     os_arch: >-
-      {{ ansible_architecture == 'x86_64' | ternary('amd64', 'i386') }}
+      {{ (ansible_architecture == 'x86_64') | ternary('amd64', 'i386') }}
 
 - name: Debian - Download {{ beat }} from url
   get_url:
